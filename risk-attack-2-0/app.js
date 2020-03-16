@@ -7,6 +7,10 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+if(process.env.NODE_ENV === 'development') {
+  require("dotenv").config();
+ }
+
 var app = express();
 
 // view engine setup
