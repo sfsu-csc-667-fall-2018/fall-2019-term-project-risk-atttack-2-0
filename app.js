@@ -8,6 +8,10 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const lobbyRouter = require('./routes/lobby');
 const gamesRouter = require('./routes/games');
+const settingsRouter = require('./routes/settings');
+
+const apiRouter = require('./routes/api/game');
+
 const testsRouter = require ('./tests/test');
 
 
@@ -32,6 +36,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/lobby', lobbyRouter);
 app.use('/games', gamesRouter);
+app.use('/settings', settingsRouter);
+app.use('/api/games', apiRouter);
 app.use('/tests', testsRouter);
 
 
