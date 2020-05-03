@@ -5,5 +5,9 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
+/*router.get('/login', function(request, response) {
+  response.send('respond with a resource');
+  response.render('unauthenticated/login')
+});*/
 
 module.exports = router;

@@ -7,6 +7,10 @@
 var app = require('../app');
 var debug = require('debug')('risk-attack-2-0:server');
 var http = require('http');
+/*const socketIO = require('socket.io');
+const server = http.createServer(app);
+const io = socketIO(server);*/
+const socket = require('../socket/');
 
 /**
  * Get port from environment and store in Express.

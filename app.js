@@ -4,9 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var testsRouter = require ('./tests/test');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const testsRouter = require ('./tests/test');
+
 
 
 if(process.env.NODE_ENV === 'development') {
