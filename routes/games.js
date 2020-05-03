@@ -2,9 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(_, response) {
+router.get('/:id', function(request, response) {
     //response.send('respond with a resource');
-    response.render('authenticated/lobby')
+
+    const { id } = request.params;
+    response.render('authenticated/game', { id })
 });
 
 module.exports = router;
