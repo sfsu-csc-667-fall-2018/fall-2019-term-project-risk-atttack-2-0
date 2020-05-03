@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    p This is the game page
+
+    p this is gameroom #{id}
+
+    form(method='post', action='/api/games/#{id}')
+        button(type='submit') POST /api/games/#{id}

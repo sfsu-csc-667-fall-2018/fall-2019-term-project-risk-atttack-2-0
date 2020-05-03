@@ -4,9 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var testsRouter = require ('./tests/test');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const lobbyRouter = require('./routes/lobby');
+const gamesRouter = require('./routes/games');
+const settingsRouter = require('./routes/settings');
+
+const apiRouter = require('./routes/api/game');
+
+const testsRouter = require ('./tests/test');
+
 
 
 if(process.env.NODE_ENV === 'development') {
@@ -27,6 +34,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/lobby', lobbyRouter);
+app.use('/games', gamesRouter);
+app.use('/settings', settingsRouter);
+app.use('/api/games', apiRouter);
 app.use('/tests', testsRouter);
 
 
