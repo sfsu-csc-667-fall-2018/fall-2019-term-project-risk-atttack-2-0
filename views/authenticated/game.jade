@@ -5,5 +5,15 @@ block content
 
     p this is gameroom #{id}
 
-    form(method='post', action='/api/games/#{id}')
+    form(method='post', action=`/api/games/${id}`)
         button(type='submit') POST /api/games/#{id}
+
+    form(method='post', action=`/api/games/${id}/move/`)
+        button(type='submit') POST /api/games/#{id}/move
+
+    p
+        input#move-coordinate(type='text')
+        a#move-test(href=`/api/games/${id}/move/`) Make a move
+
+
+    script(src='/javascripts/game.js')
