@@ -10,15 +10,16 @@ html
         center
           | Registration
           br
-      #registration-error-msg-holder
-        p#registration-error-msg Invalid Information
-      form#registration-form
-        input#username-field.registration-form-field(type='text' name='username' placeholder='Enter Username')
-        br
-        input#email-field.registration-form-field(type='email' name='username' placeholder='Enter E-Mail')
-        br
-        input#password-field.registration-form-field(type='password' name='password' placeholder='Password')
-        br
-        input#password-field2.registration-form-field(type='password' name='password2' placeholder='Confirm Password')
-        br
-        input#registration-form-submit(type='submit' value='Register with RiskAttack 2.0')
+      //- #registration-error-msg-holder
+      //-   p#registration-error-msg Invalid Information
+        
+      form#registration-form(action="./register", method='POST')
+          input#username-field.registration-form-field(type='text' name='username' placeholder='Enter Username')
+          br
+          input#email-field.registration-form-field(type='email' name='email' placeholder='Enter E-Mail')
+          br
+          input#password-field.registration-form-field(type='password' name='password' placeholder='Password')
+          br
+          input#password-field2.registration-form-field(type='password' name='password2' placeholder='Confirm Password')
+          br
+          input#registration-form-submit(type='submit' value='Register with RiskAttack 2.0')
