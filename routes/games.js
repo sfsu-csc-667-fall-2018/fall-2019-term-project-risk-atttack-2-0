@@ -9,4 +9,10 @@ router.get('/:id', function(request, response) {
     response.render('authenticated/game', { id })
 });
 
+
+router.get('/gamestest', function(request, response) {
+
+    response.render('authenticated/gametest')
+});
+
 module.exports = router;

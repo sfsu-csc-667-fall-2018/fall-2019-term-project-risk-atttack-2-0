@@ -1,0 +1,86 @@
+
+/*
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-weight: bold;
+  font-size: 32px;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background-image: url('/imgs/svgmap.svg');
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  text-shadow: 5px 5px 4px white;
+} */
+
+.h11{
+  text-align: center;
+}
+
+.containerDiv{
+  height: 100%;
+  width: 100%;
+}
+
+
+
+
+.bottomDiv{
+  height: 100%;
+  width: 70%;
+  display:inline-block;
+}
+
+
+.sideDiv{
+  height: 100%;
+  width: 30%;
+  display:inline-block;
+}
+
+.mapContainer{
+  height: 100%;
+  width: 100%;
+  display:inline-block;
+}
+
+.bgImgCenter{
+  height: 100%;
+  width: 100%;
+  padding-top: 50px;
+  z-index: -1;
+}
+
+
+.mapButton {
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.mapButton:hover {
+  background-color: black;
+}
+
+.oneButton{
+  color: Red;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+
+}
+.twoButton{
+  color: Blue;
+  position: absolute;
+  top: 30%;
+  left: 20%;
+  transform: translate(-20%, -20%);
+  -ms-transform: translate(-20%, -20%);
+
+}

@@ -36,6 +36,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/lobby', lobbyRouter);
 app.use('/games', gamesRouter);
+app.use('/gamestest', gamesRouter);
 app.use('/settings', settingsRouter);
 app.use('/api/games', apiRouter);
 app.use('/tests', testsRouter);

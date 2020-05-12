@@ -1,0 +1,244 @@
+doctype html
+html
+    head
+        title RiskAttack 2.0 Homepage
+        link(href='/css/game.css' rel='stylesheet')
+    body
+      span
+        h2
+          center [player] vs. [player2]
+      nav
+        center
+          button#chatButton.headButtons(onclick="document.getElementById('id01').style.display='block'") Open Chat Window
+      #map-holder(style='float: left; width: auto;')
+        img#map-image(src='/imgs/riskmap.png')
+        #territory-table
+          table(style='width:100%')
+            tbody
+              tr
+                th Country
+                th Allied Troops
+                th Enemy Troops
+              tr
+                td
+                  b North America
+                td
+                td
+              tr
+                td Western USA
+                td
+                td
+              tr
+                td Eastern USA
+                td
+                td
+              tr
+                td Central America
+                td
+                td
+              tr
+                td Alaska
+                td
+                td
+              tr
+                td Northwest Territory
+                td
+                td
+              tr
+                td Alberta
+                td
+                td
+              tr
+                td Ontario
+                td
+                td
+              tr
+                td Eastern Canada
+                td
+                td
+              tr
+                td Greenland
+                td
+                td
+              tr
+                td
+                  b South America
+                td
+                td
+              tr
+                td Venezuela
+                td
+                td
+              tr
+                td Peru
+                td
+                td
+              tr
+                td Brazil
+                td
+                td
+              tr
+                td Argentina
+                td
+                td
+              tr
+                td
+                  b Europe
+                td
+                td
+              tr
+                td Great Britain
+                td
+                td
+              tr
+                td Western Europe
+                td
+                td
+              tr
+                td Iceland
+                td
+                td
+              tr
+                td Northern Europe
+                td
+                td
+              tr
+                td Southern Europe
+                td
+                td
+              tr
+                td Scandinavia
+                td
+                td
+              tr
+                td Russia
+                td
+                td
+              tr
+                td
+                  b Africa
+                td
+                td
+              tr
+                td Egypt
+                td
+                td
+              tr
+                td North Africa
+                td
+                td
+              tr
+                td East Africa
+                td
+                td
+              tr
+                td Central Africa
+                td
+                td
+              tr
+                td South Africa
+                td
+                td
+              tr
+                td Madagascar
+                td
+                td
+              tr
+                td
+                  b Asia
+                td
+                td
+              tr
+                td Middle East
+                td
+                td
+              tr
+                td Afghanistan
+                td
+                td
+              tr
+                td Ural
+                td
+                td
+              tr
+                td Siberia
+                td
+                td
+              tr
+                td Yakutsk
+                td
+                td
+              tr
+                td Kamchalka
+                td
+                td
+              tr
+                td Irkutsk
+                td
+                td
+              tr
+                td Mongolia
+                td
+                td
+              tr
+                td China
+                td
+                td
+              tr
+                td India
+                td
+                td
+              tr
+                td Southeast Asia
+                td
+                td
+              tr
+                td Japan
+                td
+                td
+              tr
+                td
+                  b Australia
+                td
+                td
+              tr
+                td Indonesia
+                td
+                td
+              tr
+                td New Guinea
+                td
+                td
+              tr
+                td Western Australia
+                td
+                td
+              tr
+                td Eastern Australia
+                td
+                td
+      #id02(style='float: right; width: 40%; position: relative; min-width: 10%')
+        .container(style='background-color:#f1f1f1')
+          b
+            center Game Log
+        #chatbox
+        .container(style='background-color:#f1f1f1')
+          input(type='text', placeholder='Enter Command: /help for How To Play', name='command')
+          button(type='submit') Send Command
+      #id01.modal
+        form.modal-content.animate(action='/action_page.php', method='post')
+          .container(style='background-color:#f1f1f1')
+            b Local Chat
+          #chatbox
+          .container(style='background-color:#f1f1f1')
+            label(for='uname')
+              b Chatting as: [username]
+            input(type='text', placeholder='Enter Message', name='uname', required='')
+            button(type='submit') Send
+      script.
+        var modal = document.getElementById('id01');
+        window.onclick = function(event) {
+        if (event.target == modal) {
+        modal.style.display = "none";
+        }
+        }
