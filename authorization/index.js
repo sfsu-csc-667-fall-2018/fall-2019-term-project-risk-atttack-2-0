@@ -11,15 +11,15 @@ const findUserCallback = (email, password, callback) => {
         .catch(error =>{
             return callback(error);
         });
-    db.users.findByUsername(email, function (err, user) {
+    /*db.users.findByUsername(email, function (err, user) {
         if(err) { return callback(err); }
         if(!user) { return callback(null, false); }
         if(user.password != password){ return callback(null, false); }
         return callback(null, user);
-    });
+    });*/
 };
 
-const serializeUser = (user, callback) =>{
+/*const serializeUser = (user, callback) =>{
     callback(null, user.id)
 };
 const deserializeUser = (id, callback) =>{
@@ -30,11 +30,11 @@ const deserializeUser = (id, callback) =>{
         .catch(error =>{
             callback(error)
         })
-};
+};*/
 
 passport.use(new Strategy(findUserCallback));
 
-passport.serializeUser(serializeUser());
-passport.deserializeUser(deserializeUser());
+/*passport.serializeUser(serializeUser());
+passport.deserializeUser(deserializeUser());*/
 
 module.exports = passport;

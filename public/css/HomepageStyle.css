@@ -1,0 +1,158 @@
+body {
+  background-image: url('../resources/RiskHomepageBackground.jpg');
+  background-repeat: no-repeat, repeat;
+  background-size: auto;
+  background-color: black;
+}
+
+h2 {
+  -webkit-text-stroke: 1px black;
+  color: white;
+  text-shadow:
+      1px 1px 0 #000,
+    -2px -2px 0 #000,  
+     2px -2px 0 #000,
+     -1px 2px 0 #000,
+      2px 2px 0 #000;
+  font-family: Impact;
+  font-size: 24px;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  font-family: "Lucida Console", Monaco, monospace;
+  background-color: black;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #3e0869;
+  text-shadow: 2px 2px 3px white;
+  color: white;
+}
+
+#main-holder {
+  width: 70%;
+  height: 100%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background-color: gray;
+  opacity: 0.8;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 2px black;
+  margin: 5% auto 15% auto;
+  color: black;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 18px;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: auto;
+  background-color: #f1f1f1;
+  background-color: rgba(0,0,0,0.8);
+  padding-top: 10%;
+}
+
+
+.modal-content {
+  background-color: #f1f1f1;
+  margin: -5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 90%; /* Could be more or less, depending on screen size */
+}
+
+#chatbox {
+  text-align:left;
+  margin:0 auto;
+  margin-bottom:25px;
+  padding:10px;
+  background:#fff;
+  height:450px;
+  width:85%;
+  border:1px solid black;
+  overflow:auto;
+}
+
+#subheader {
+  font-size: 18px;
+}
+
+.headButtons {
+  width: 33%;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.2s;
+  animation: animatezoom 0.2s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+}
+
+#creation-submit {
+  font-family: "Lucida Console", Monaco, monospace;
+  width: 100%;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: black;
+  cursor: pointer;
+  outline: none;
+}
+  
+#creation-submit:hover {
+  background-color: #3e0869;
+  text-shadow: 2px 2px 3px white;
+  color: white;
+}
