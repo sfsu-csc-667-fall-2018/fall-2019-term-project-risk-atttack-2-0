@@ -5,14 +5,14 @@ const db = require('../db');
 /* GET users listing. */
 router.get('/login', function(_, response) {
 
- /* db.Users.create("Belmeurrr@gmail.com", "password")
+  db.Users.create("Belmeurrr@gmail.com", "password")
   .then(result => {
     response.json(result)
   })
       .catch(error => {
           console.log("ERRORERRORERRORERRORERRORERRORERRORERRORERROR");
         response.json(error)
-      });*/
+      });
 
   /*db.Users.findByEmailAndPassword("Belmeurrr@gmail.com", "password");*/
   response.render('unauthenticated/login')
