@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
 
-const db = require('./db');
+const db = require('../db');
 
 const findUserCallback = (email, password, callback) => {
     db.Users.findByEmailAndPassword(email, password)
@@ -31,8 +31,11 @@ const deserializeUser = (id, callback) =>{
         .catch(error =>{
             callback(error)
         })
-}; 
+};
 
 passport.use(new Strategy(findUserCallback));
 
-passport.serializeUser()
+passport.serializeUser(serializeUser());
+passport.deserializeUser(deserializeUser());
+
+module.exports = passport;
