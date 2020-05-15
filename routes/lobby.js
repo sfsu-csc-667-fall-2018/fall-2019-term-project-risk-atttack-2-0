@@ -1,10 +1,16 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
+
 
 /* GET users listing. */
-router.get('/', function(_, response) {
+router.get('/',
+    ensureLoggedIn("/"),
+    function(_, response) {
     //response.send('respond with a resource');
-    response.render('authenticated/lobby')
+        console.log("WE ARE PASSED ENSURELOGGEDIN");
+
+            response.render('authenticated/lobby')
 });
 
 module.exports = router;

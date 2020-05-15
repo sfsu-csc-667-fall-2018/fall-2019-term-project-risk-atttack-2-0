@@ -7,47 +7,44 @@ const passport = require('../authorization');
 router.get('/login', function (request, response) {
 
     console.log(request.flash());
-    response.render('unauthenticated/login', {
-        message: request.flash()
-    })
+    response.render('unauthenticated/login')
 
 
   /*db.Users.findByEmailAndPassword("Belmeurrr@gmail.com", "password");*/
 });
 router.post('/login',
-    passport.authenticate('local', {
+
+        passport.authenticate('local',
+            { successReturnToOrRedirect: '/lobby',
+                failureRedirect: '/login' }
+
+    )
+);
+/*,
+        { failureRedirect: '/users/login',}),
+    (request, response) => {
+        console.log("WTF IS HAPPENING");
+        response.redirect('/lobby');
+    });*/
+    /*passport.authenticate('local', {
         failureRedirect: '/users/login',
         failureFlash: true
     }),
-    (_, response ) =>
-    response.redirect('/lobby')
-)
-/*router.post('/login',
-    passport.authenticate('local'),
-    function(req, res) {
-        // If this function gets called, authentication was successful.
-        // `req.user` contains the authenticated user.
-        res.redirect('/lobby');
-    });*/
-/*router.post('/login',/!*(request, response ) => {
-        const {username, password} = request.body;
-        console.log(username, password);
-        response.json(request.body)
-    }*!/
-        passport.authenticate('local',
+    (_, response ) => {
 
-        {failureRedirect: '/login',
-            successRedirect: '/lobby' })
-        //(request, response) =>
-            //console.log(JSON.stringify(request.body))
-                //.then(response.redirect('/lobby'))
-            )
-            /!*function(req, res) {
-                // If this function gets called, authentication was successful.
-                // `req.user` contains the authenticated user.
-                res.redirect('/lobby')}*!/
+        console.log("PRINTING OUT RESPONSE.BODY");
+        console.log(response.body);
+        //console.log(JSON.stringify(response));
+        console.log("authenticated, redirecting to lobby");
+        response.redirect('/lobby')
+    }
 
-;*/
+)*/
+
+router.get('/logout', (request, response) => {
+    request.logout();
+    response.redirect('/');
+});
 
 router.get('/register', function (request, response) {
 
