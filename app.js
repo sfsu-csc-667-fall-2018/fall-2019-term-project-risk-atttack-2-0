@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
+const flash = require('connect-flash');
 
 //console.log("NODE ENV IS " + process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'development') {
@@ -45,6 +46,8 @@ app.use(session(
     resave: false,
     saveUninitialized: false
   }));
+
+app.use(flash())
 
 app.use(passport.initialize());
 app.use(passport.session());

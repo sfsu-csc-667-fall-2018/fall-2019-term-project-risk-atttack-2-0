@@ -3,15 +3,16 @@ const Strategy = require('passport-local').Strategy;
 
 const db = require('../db');
 
-const findUserCallback = (email, password, callback) => {
-    db.aUsers.findByEmailAndPassword(email, password)
+const findUserCallback = (username, password, callback) => {
+    db.Users.findByUsernameAndPassword(username, password)
         .then(user => {
             return callback(null, user)
         })
         .catch(error =>{
-            return callback(error);
+            return callback("Email and password not found");
         });
-    /*db.users.findByUsername(email, function (err, user) {
+
+    /*db.Users.findByUsernameAndPassword(username, function (err, user) {
         if(err) { return callback(err); }
         if(!user) { return callback(null, false); }
         if(user.password != password){ return callback(null, false); }
