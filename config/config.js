@@ -1,8 +1,7 @@
 require('dotenv').config();
+
 module.exports = {
   "development": {
-    //"username": "postgres",
-    "password": "password",
     "use_env_variable": "DATABASE_URL",
     "dialect": "postgres"
   },
@@ -13,4 +12,5 @@ module.exports = {
   "production": {
     "use_env_variable": "DATABASE_URL",
     "dialect": "postgres"
-  } };
+  }
+};

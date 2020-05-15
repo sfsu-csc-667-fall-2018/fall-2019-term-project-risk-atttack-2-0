@@ -1,9 +1,6 @@
-const Promise = require('bluebird');
-const initOptions = {
-    promiseLib: Promise
-}
-const pgp = require('pg-promise')(initOptions);
+const pgp = require('pg-promise')();
 
-const connection = pgp(process.env.DATABASE_URL|| "postgres://Daniel@localhost:5432/risk_db");
+console.log("ESTABLISHING CONNECTION WITH " + process.env.DATABASE_URL)
+const connection = pgp(process.env.DATABASE_URL);
 
 module.exports = connection;
