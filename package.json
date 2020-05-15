@@ -14,6 +14,7 @@
     "build:dev": "watchify frontend/main.js -o public/javascripts/bundle.js -t [babelify -- presents [es2015] ] -v*"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
     "core-js": "^3.6.5",
     "debug": "~2.6.9",

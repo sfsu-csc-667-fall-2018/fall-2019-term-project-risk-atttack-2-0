@@ -4,7 +4,7 @@ const Strategy = require('passport-local').Strategy;
 const db = require('../db');
 
 const findUserCallback = (email, password, callback) => {
-    db.Users.findByEmailAndPassword(email, password)
+    db.aUsers.findByEmailAndPassword(email, password)
         .then(user => {
             return callback(null, user)
         })
@@ -19,7 +19,7 @@ const findUserCallback = (email, password, callback) => {
     });*/
 };
 
-/*const serializeUser = (user, callback) =>{
+const serializeUser = (user, callback) =>{
     callback(null, user.id)
 };
 const deserializeUser = (id, callback) =>{
@@ -30,11 +30,11 @@ const deserializeUser = (id, callback) =>{
         .catch(error =>{
             callback(error)
         })
-};*/
+};
 
 passport.use(new Strategy(findUserCallback));
 
-/*passport.serializeUser(serializeUser());
-passport.deserializeUser(deserializeUser());*/
+passport.serializeUser(serializeUser);
+passport.deserializeUser(deserializeUser);
 
 module.exports = passport;

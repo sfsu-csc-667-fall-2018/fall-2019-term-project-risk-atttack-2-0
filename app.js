@@ -5,11 +5,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 
-console.log("NODE ENV IS " + process.env.NODE_ENV)
+//console.log("NODE ENV IS " + process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'development') {
   require("dotenv").config();
 
-  console.log(process.env)
+  //console.log(process.env)
 }
 
 const passport = require('./authorization');
