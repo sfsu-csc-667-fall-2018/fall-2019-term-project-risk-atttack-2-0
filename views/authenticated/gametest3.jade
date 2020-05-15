@@ -1,26 +1,32 @@
+- var playerId = 4;
+
 doctype html
 html
     head
         title RiskAttack 2.0 Homepage
+        script(src='javascripts/testGameButtons.js')               
         link(href='/css/gm.css' rel='stylesheet')
 
     body
-      h1.h11 Game Room
+      h1.h11 Game Room 
+      h2.pid Player ID: #{playerId}
       
       div.contianerDiv
       
         div.mapContainer
           img#backgroundimage(class="bgImgCenter" src="/imgs/svgmap.svg" border="0" alt="")
-          button.mapButton.oneButton Button
-          button.mapButton.twoButton Another
+          button#mapB1.mapButton.oneButton(onclick="myFunction( id, #{playerId}) ") Button
+          button#mapB2.mapButton.twoButton(onclick="myFunction( id, #{playerId} )") Another
+          button#mapB3.mapButton.threeButton(onclick="myFunction( id, #{playerId}) ") Button
+          button#mapB4.mapButton.fourButton(onclick="myFunction( id, #{playerId} )") Button
+          button#mapB5.mapButton.fiveButton(onclick="myFunction( id, #{playerId} )") Button
+          button#mapB6.mapButton.sixButton(onclick="myFunction( id, #{playerId})") Button
 
 
-          
       div.contianerDiv
         div.bottomDiv
           h2 Bottom Div
-          p something
-        
+          
         div.sideDiv
           h2 Side Div
           p test something

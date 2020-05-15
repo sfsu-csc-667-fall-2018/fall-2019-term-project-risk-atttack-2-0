@@ -1,19 +1,8 @@
 
-/*
-body {
-  height: 100%;
-  margin: 0;
-  font-family: "Lucida Console", Monaco, monospace;
-  font-weight: bold;
-  font-size: 32px;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  background-image: url('/imgs/svgmap.svg');
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  text-shadow: 5px 5px 4px white;
-} */
+.testimg{
+  height: 10%;
+  width: 10%;
+}
 
 .h11{
   text-align: center;
@@ -23,7 +12,6 @@ body {
   height: 100%;
   width: 100%;
 }
-
 
 
 
@@ -53,21 +41,25 @@ body {
   z-index: -1;
 }
 
+.pid{
+  text-align: center;
+}
 
 .mapButton {
-  font-size: 16px;
-  padding: 12px 24px;
+  background-color: Transparent;
+  font-size: 20px;
+  padding: 2px 10px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 1px;
 }
 
 .mapButton:hover {
-  background-color: black;
+  background-color: grey;
 }
 
 .oneButton{
-  color: Red;
+  color: Black;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -76,11 +68,49 @@ body {
 
 }
 .twoButton{
-  color: Blue;
+  color: Black;
   position: absolute;
   top: 30%;
   left: 20%;
-  transform: translate(-20%, -20%);
-  -ms-transform: translate(-20%, -20%);
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+
+}
+
+.threeButton{
+  color: Black;
+  position: absolute;
+  top: 60%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+
+}
+.fourButton{
+  color: Black;
+  position: absolute;
+  top: 23%;
+  right: 40%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+
+}
+.fiveButton{
+  color: Black;
+  position: absolute;
+  top: 40%;
+  right:20%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+
+}
+
+.sixButton{
+  color: Black;
+  position: absolute;
+  top: 65%;
+  right: 10%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 
 }

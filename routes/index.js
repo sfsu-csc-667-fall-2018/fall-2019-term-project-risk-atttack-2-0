@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var db = require('../db');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -16,16 +18,22 @@ router.get('/gamestest', function(request, response) {
 });
 
 
-router.get('/gamestest2', function(request, response) {
 
-    response.render('authenticated/gametest2')
+router.get('/gamestest4', function(request, response) {
+
+    response.render('authenticated/gametest4')
 });
 
 
-router.get('/gamestest3', function(request, response) {
-
-    response.render('authenticated/gametest3')
+router.put('/gamestest4', function(request, response) {
+  db.any(`SELECT * from game_state where game_id = '${request.body.game_id}'`)
+          .then(results => response.json(results))
+          .catch(error => {
+              console.log(error);
+              response.json({error})
+          });
 });
+
 
 
 module.exports = router;
