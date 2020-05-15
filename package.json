@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start:dev": "SET \"NODE_ENV=development\" SET DEBUG=myapp:* & nodemon ./bin/www",
+    "start:dev": "NODE_ENV=development DEBUG=myapp:* nodemon ./bin/www",
+    "start:dev:windoze": "SET \"NODE_ENV=development\" SET DEBUG=myapp:* & nodemon ./bin/www",
     "db:create:migration": "npx sequelize migration:generate --name ",
     "db:migrate": "npx sequelize db:migrate",
     "db:rollback": "npx sequelize db:migrate:undo",
@@ -13,17 +14,22 @@
     "build:dev": "watchify frontend/main.js -o public/javascripts/bundle.js -t [babelify -- presents [es2015] ] -v*"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
     "core-js": "^3.6.5",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
+    "express-session": "^1.17.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "pg-promise": "^10.4.4",
     "pug": "^2.0.4",
-    "sequelize": "^5.21.5",
+    "sequelize": "^5.21.8",
     "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
