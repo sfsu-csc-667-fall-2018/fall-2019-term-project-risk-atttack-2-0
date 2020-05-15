@@ -4,4 +4,4 @@
 conf/httpd.conf
 public_html/.htaccess
 .env
-node_modules/*
+node_modules/
