@@ -30,7 +30,7 @@ const serializeUser = (user, callback) =>{
     console.log(user.id);
     callback(null, user.id)
 };
-const deserializaeUser = (user, callback) =>{
+const deserializeUser = (user, callback) =>{
     console.log("WE ARE IN DESERIALIZEUSER");
     db.Users.findById(user.id)
         .then(user =>{
@@ -44,7 +44,7 @@ const deserializaeUser = (user, callback) =>{
 passport.use(new Strategy(findUserCallback));
 
 passport.serializeUser(serializeUser);
-passport.deserializeUser(deserializaeUser);
+passport.deserializeUser(deserializeUser);
 /*passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);*/
 
