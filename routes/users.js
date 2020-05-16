@@ -44,23 +44,29 @@ router.get('/register', function (request, response) {
 });
 
 router.post('/register', (request, response ) => {
-  const {username, password, email} = request.body;
+  const {username, password, email, password2} = request.body;
 
-  bcrypt.genSalt(saltRounds, function(err, salt) {
-        bcrypt.hash(password, salt, function(err, hash) {
-            // Store hash in your password DB.
+  if(password !== password2){
+      response.redirect('/users/register')
+  }else{
+      bcrypt.genSalt(saltRounds, function(err, salt) {
+          bcrypt.hash(password, salt, function(err, hash) {
+              // Store hash in your password DB.
 
-            console.log(password, hash);
-            db.Users.create(email, hash, username)
-                .then(result => {
-                    response.render('unauthenticated/login')
+              console.log(password, hash);
+              db.Users.create(email, hash, username)
+                  .then(result => {
+                      response.render('unauthenticated/login')
 
-                })
-                .catch(error => {
-                    console.log("ERROR", error);
-                });
-        });
-    });
+                  })
+                  .catch(error => {
+                      console.log("ERROR", error);
+                  });
+          });
+      });
+  }
+
+
 
 });
 
