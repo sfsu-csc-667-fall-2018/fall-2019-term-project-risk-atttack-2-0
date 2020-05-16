@@ -6,7 +6,6 @@ const saltRounds = 10;
 const db = require('../db');
 
 const findUserCallback = (username, password, callback) => {
-    console.log(username, password);
     //encrypt the password they gave us and compare that with the database
     db.Users.getHash(username)
         .then(user => {
@@ -97,22 +96,14 @@ const findUserCallback = (username, password, callback) => {
 
 
 const serializeUser = (user, callback) =>{
-    console.log("WE ARE IN SERIALIZEUSER");
-    console.log("USER: ", user);
-    console.log("USER.ID", user.id);
-
     callback(null, user.id);
 };
 const deserializeUser = (user, callback) =>{
-    console.log("WE ARE IN DESERIALIZEUSER");
-    console.log(user);
     db.Users.findById(user)
         .then(user =>{
-            console.log("we found the user");
             callback(null, user)
         })
         .catch(error =>{
-            console.log("we found the user");
             callback(error)
         })
 };
