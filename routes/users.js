@@ -6,76 +6,73 @@ const passport = require('../authorization');
 /* GET users listing. */
 router.get('/login', function (request, response) {
 
-    console.log(request.flash());
-    response.render('unauthenticated/login', {
-        message: request.flash()
-    })
+   // console.log(request.session);
+    response.render('unauthenticated/login')
 
 
   /*db.Users.findByEmailAndPassword("Belmeurrr@gmail.com", "password");*/
 });
-router.post('/login',
-    passport.authenticate('local', {
+/*router.post('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+        if (err) { return next(err); }
+        if (!user) { return res.redirect('/users/login'); }
+        req.logIn(user, function(err) {
+            if (err) { return next(err); }
+            console.log("WE IN ROUTER.POST");
+            //console.log(JSON.stringify(req.session.passport.user));
+            return res.redirect('/lobby');
+        });
+    })(req, res, next);
+});*/
+/*,
+        { failureRedirect: '/users/login',}),
+    (request, response) => {
+        console.log("WTF IS HAPPENING");
+        response.redirect('/lobby');
+    });*/
+    /*passport.authenticate('local', {
         failureRedirect: '/users/login',
         failureFlash: true
     }),
-    (_, response ) =>
-    response.redirect('/lobby')
-)
-/*router.post('/login',
-    passport.authenticate('local'),
-    function(req, res) {
-        // If this function gets called, authentication was successful.
-        // `req.user` contains the authenticated user.
-        res.redirect('/lobby');
-    });*/
-/*router.post('/login',/!*(request, response ) => {
-        const {username, password} = request.body;
-        console.log(username, password);
-        response.json(request.body)
-    }*!/
-        passport.authenticate('local',
+    (_, response ) => {
 
-        {failureRedirect: '/login',
-            successRedirect: '/lobby' })
-        //(request, response) =>
-            //console.log(JSON.stringify(request.body))
-                //.then(response.redirect('/lobby'))
-            )
-            /!*function(req, res) {
-                // If this function gets called, authentication was successful.
-                // `req.user` contains the authenticated user.
-                res.redirect('/lobby')}*!/
+        console.log("PRINTING OUT RESPONSE.BODY");
+        console.log(response.body);
+        //console.log(JSON.stringify(response));
+        console.log("authenticated, redirecting to lobby");
+        response.redirect('/lobby')
+    }
 
-;*/
+)*/
+router.post('/login', passport.authenticate('local', {
+            failureRedirect: '/users/login',
+            failureFlash: true
+        }),
+        function(request, response ) {
+            //request.session.save();
+            response.redirect('/lobby');
+        }
+    );
+
+router.get('/logout', (request, response) => {
+    request.logout();
+    response.redirect('/');
+});
 
 router.get('/register', function (request, response) {
-
-  /*const {username, password} = request.body;
-  console.log(username, password);*/
-  //response.send('respond with a resource');
   response.render('unauthenticated/register')
 });
 
 router.post('/register', (request, response ) => {
   const {username, password, email} = request.body;
-  console.log(username, password, email);
-
-  console.log("RETURNING REQUEST INFO" + JSON.stringify(request.body));
-
   db.Users.create(email, password, username)
       .then(result => {
-        //response.json(result)
           response.render('unauthenticated/login')
 
       })
       .catch(error => {
         console.log("ERROR", error);
-        // response.json(error)
       });
-
-
-  //response.json(request.body);
 });
 
 module.exports = router;
