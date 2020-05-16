@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 let session = require('express-session');
 const flash = require('connect-flash');
+const bodyParser = require('body-parser');
 
 //console.log("NODE ENV IS " + process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'development') {
@@ -50,6 +51,8 @@ app.use(session(
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 app.use(flash());
 

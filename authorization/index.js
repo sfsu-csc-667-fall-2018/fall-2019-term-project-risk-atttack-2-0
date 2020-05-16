@@ -4,12 +4,8 @@ const Strategy = require('passport-local').Strategy;
 const db = require('../db');
 
 const findUserCallback = (username, password, callback) => {
-    console.log(username, password);
     db.Users.findByUsernameAndPassword(username, password)
         .then(user => {
-            console.log("We Found The User");
-            console.log(JSON.stringify(user));
-            //console.log(callback(null, user));
             return callback(null, user)
         })
         .catch(error =>{
@@ -26,17 +22,15 @@ const findUserCallback = (username, password, callback) => {
 };
 
 const serializeUser = (user, callback) =>{
-    console.log("WE ARE IN SERIALIZEUSER");
-    console.log(user.id);
-    callback(null, user.id)
+    callback(null, user.id);
 };
 const deserializeUser = (user, callback) =>{
-    console.log("WE ARE IN DESERIALIZEUSER");
-    db.Users.findById(user.id)
+    db.Users.findById(user)
         .then(user =>{
             callback(null, user)
         })
         .catch(error =>{
+            console.log("we didnt find the user");
             callback(error)
         })
 };

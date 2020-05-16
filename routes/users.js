@@ -49,17 +49,9 @@ router.post('/login', passport.authenticate('local', {
             failureFlash: true
         }),
         function(request, response ) {
-
-            console.log("PRINTING OUT RESPONSE.BODY");
-            console.log(response.body);
-            //console.log(JSON.stringify(response));
-            console.log("authenticated, redirecting to lobby");
-            request.session.save(() => {
-                console.log("REDIRECTING");
-                response.redirect('/lobby');
-            })
+            //request.session.save();
+            response.redirect('/lobby');
         }
-
     );
 
 router.get('/logout', (request, response) => {
@@ -68,32 +60,19 @@ router.get('/logout', (request, response) => {
 });
 
 router.get('/register', function (request, response) {
-
-  /*const {username, password} = request.body;
-  console.log(username, password);*/
-  //response.send('respond with a resource');
   response.render('unauthenticated/register')
 });
 
 router.post('/register', (request, response ) => {
   const {username, password, email} = request.body;
-  console.log(username, password, email);
-
-  console.log("RETURNING REQUEST INFO" + JSON.stringify(request.body));
-
   db.Users.create(email, password, username)
       .then(result => {
-        //response.json(result)
           response.render('unauthenticated/login')
 
       })
       .catch(error => {
         console.log("ERROR", error);
-        // response.json(error)
       });
-
-
-  //response.json(request.body);
 });
 
 module.exports = router;
