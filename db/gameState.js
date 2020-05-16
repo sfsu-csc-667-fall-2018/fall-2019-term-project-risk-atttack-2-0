@@ -6,8 +6,8 @@ const createGameState = (game_id) =>
 const getGameState = (game_id) =>
   db.one("SELECT * from game_state where game_id = ${game_id}", { game_id});
 
-const updateGameState = (username, password) =>
-    db.one("SELECT id, username, createdat FROM users WHERE username=${username} and password=${password}", { username, password });
+const updateGameState = (column, value, game_id) =>
+    db.one("UPDATE game_state SET " + column + " = ${value} WHERE game_id = ${game_id} RETURNING game_id", {value, game_id });
 
 module.exports = {
   createGameState,

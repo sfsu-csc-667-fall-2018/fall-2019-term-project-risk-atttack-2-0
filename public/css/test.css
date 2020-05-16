@@ -2,6 +2,17 @@
   text-align: center;
 }
 
+
+
+.parentflexContainer{
+  max-height: 80%;
+  max-width: 80%;
+
+  display: flex;
+  flex-direction: row;
+}
+
+
 .contain{
   cursor: pointer;
   position: relative;

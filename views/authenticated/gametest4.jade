@@ -1,50 +1,30 @@
 script(type='text/javascript' src='javascripts/imageSwitch.js')
 
-- var playerId = 0;
-- var armies = 500;
+- var playerId = 4;
+- var armies = 800;
   
-script.
-    getGameState();
-    getOwnerId();
-    test();
-    fuck();
+
 
   
 doctype html
 html
     head
         title RiskAttack 2.0 Homepage         
-        link(href='/css/test.css', type="text/css", rel='stylesheet')
-        
+        //- link(href='/css/test.css', type="text/css", rel='stylesheet')
+        link(href='/css/map.css', type="text/css", rel='stylesheet')
+
     body
         h1.h11 Game Room 
         h2.h11 Player ID: #{playerId} - Armies: #{armies}
     
     
-    div.parentflex
-      include ./map/tophalf.jade
-    div.parentflex
-      include ./map/botthomhalf.jade
-
+    div.parentflexContainer
+      include ./map/map.jade
       
+    //- div.parentflex
+    //-   include ./map/tophalf.jade
+    //- div.parentflex
+    //-   include ./map/botthomhalf.jade
 
-
-
-
-
-
-
-
-//- script.
-//-   var game_id = 1;
-//-   var map_variables = [];
-//-   fetch('/gamestest4',
-//-       { method: 'PUT',
-//-         body: JSON.stringify({ game_id }),        
-//-         headers: {
-//-         'Content-Type': 'application/json'
-//-       }})
-//-       .then(response => response.json())
-//-       .then(data => getGameState(data[0]))
-//-       .catch(error => console.log(error))
-  
+script.
+    reloadGameState(); 

@@ -36,21 +36,19 @@ router.put('/gamestest4', function(request, response) {
 
 
 
-
-
-
-
-
-
 router.post('/gamestest4', function(request, response) {
-  const {game_id} = request.body;
+  const {game_id, column, value} = request.body;
 
+  console.log("Here 1", column, value, game_id);
 
-  db.GameState.getGameState(game_id)
-    .then(result => {
-        console.log("result");
-        response.json({game_state: "result"});
-    })
+  db.GameState.updateGameState(column, value, game_id)
+      .then(response.send("Shits been updated yo "))
+
+    // .then(result => {
+
+        // console.log("result");
+        // response.json({game_state: "result"});
+    // })
     .catch(error => {
       console.log("ERROR", error);
     });
