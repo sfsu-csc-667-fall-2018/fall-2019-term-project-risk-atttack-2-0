@@ -5,7 +5,6 @@ const db = require('../db');
 
 const findUserCallback = (username, password, callback) => {
     console.log(username, password);
-    console.log("WE HERE BITCHES");
     db.Users.findByUsernameAndPassword(username, password)
         .then(user => {
             console.log("We Found The User");
@@ -31,9 +30,9 @@ const serializeUser = (user, callback) =>{
     console.log(user.id);
     callback(null, user.id)
 };
-const deserializeUser = (id, callback) =>{
+const deserializaeUser = (user, callback) =>{
     console.log("WE ARE IN DESERIALIZEUSER");
-    db.Users.findById(id)
+    db.Users.findById(user.id)
         .then(user =>{
             callback(null, user)
         })
@@ -45,6 +44,8 @@ const deserializeUser = (id, callback) =>{
 passport.use(new Strategy(findUserCallback));
 
 passport.serializeUser(serializeUser);
-passport.deserializeUser(deserializeUser);
+passport.deserializeUser(deserializaeUser);
+/*passport.serializeUser(serializeUser);
+passport.deserializeUser(deserializeUser);*/
 
 module.exports = passport;

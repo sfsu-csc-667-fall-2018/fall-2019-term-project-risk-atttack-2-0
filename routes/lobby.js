@@ -5,8 +5,8 @@ const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 /* GET users listing. */
 router.get('/',
-    ensureLoggedIn("/"),
-    function(_, response) {
+    ensureLoggedIn("/users/login"),
+    function(request, response) {
     //response.send('respond with a resource');
         console.log("WE ARE PASSED ENSURELOGGEDIN");
 

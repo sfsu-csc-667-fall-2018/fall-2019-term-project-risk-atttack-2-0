@@ -6,20 +6,24 @@ const passport = require('../authorization');
 /* GET users listing. */
 router.get('/login', function (request, response) {
 
-    console.log(request.flash());
+   // console.log(request.session);
     response.render('unauthenticated/login')
 
 
   /*db.Users.findByEmailAndPassword("Belmeurrr@gmail.com", "password");*/
 });
-router.post('/login',
-
-        passport.authenticate('local',
-            { successReturnToOrRedirect: '/lobby',
-                failureRedirect: '/login' }
-
-    )
-);
+/*router.post('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+        if (err) { return next(err); }
+        if (!user) { return res.redirect('/users/login'); }
+        req.logIn(user, function(err) {
+            if (err) { return next(err); }
+            console.log("WE IN ROUTER.POST");
+            //console.log(JSON.stringify(req.session.passport.user));
+            return res.redirect('/lobby');
+        });
+    })(req, res, next);
+});*/
 /*,
         { failureRedirect: '/users/login',}),
     (request, response) => {
@@ -40,6 +44,23 @@ router.post('/login',
     }
 
 )*/
+router.post('/login', passport.authenticate('local', {
+            failureRedirect: '/users/login',
+            failureFlash: true
+        }),
+        function(request, response ) {
+
+            console.log("PRINTING OUT RESPONSE.BODY");
+            console.log(response.body);
+            //console.log(JSON.stringify(response));
+            console.log("authenticated, redirecting to lobby");
+            request.session.save(() => {
+                console.log("REDIRECTING");
+                response.redirect('/lobby');
+            })
+        }
+
+    );
 
 router.get('/logout', (request, response) => {
     request.logout();
