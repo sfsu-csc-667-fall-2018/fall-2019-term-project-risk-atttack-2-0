@@ -2,57 +2,53 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 const passport = require('../authorization');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'and_the_crowd_goes_rtj';
 
 /* GET users listing. */
 router.get('/login', function (request, response) {
-
-   // console.log(request.session);
     response.render('unauthenticated/login')
-
-
-  /*db.Users.findByEmailAndPassword("Belmeurrr@gmail.com", "password");*/
 });
-/*router.post('/login', function(req, res, next) {
-    passport.authenticate('local', function(err, user, info) {
-        if (err) { return next(err); }
-        if (!user) { return res.redirect('/users/login'); }
-        req.logIn(user, function(err) {
-            if (err) { return next(err); }
-            console.log("WE IN ROUTER.POST");
-            //console.log(JSON.stringify(req.session.passport.user));
-            return res.redirect('/lobby');
-        });
-    })(req, res, next);
-});*/
-/*,
-        { failureRedirect: '/users/login',}),
-    (request, response) => {
-        console.log("WTF IS HAPPENING");
-        response.redirect('/lobby');
-    });*/
-    /*passport.authenticate('local', {
+
+router.post('/login', /*(request, response) =>   {
+        const {password} = request.body;
+        console.log("We are in login post and the password received is: ", password);
+
+
+        /!*bcrypt.genSalt(saltRounds, function (err, salt) {
+            bcrypt.hash(password, salt, function (err, hash) {
+                // Store hash in your password DB.
+                request.password = hash;
+
+            });
+
+        })*!/
+},*/
+    passport.authenticate('local', {
+
         failureRedirect: '/users/login',
         failureFlash: true
     }),
-    (_, response ) => {
-
-        console.log("PRINTING OUT RESPONSE.BODY");
-        console.log(response.body);
-        //console.log(JSON.stringify(response));
-        console.log("authenticated, redirecting to lobby");
-        response.redirect('/lobby')
-    }
-
-)*/
-router.post('/login', passport.authenticate('local', {
-            failureRedirect: '/users/login',
-            failureFlash: true
-        }),
-        function(request, response ) {
+        function (request, response) {
             //request.session.save();
+            const {username} = request.body;
+            //console.log("The password for said user is: ", db.Users.getHash(username));
             response.redirect('/lobby');
-        }
-    );
+        }/*,
+    function (request, response) {
+        const {password} = request.body;
+        bcrypt.genSalt(saltRounds, function (err, salt) {
+            bcrypt.hash(password, salt, function (err, hash) {
+                // Store hash in your password DB.
+                request.password = hash;
+
+            });
+
+        })
+    }*/
+);
 
 router.get('/logout', (request, response) => {
     request.logout();
@@ -64,15 +60,30 @@ router.get('/register', function (request, response) {
 });
 
 router.post('/register', (request, response ) => {
-  const {username, password, email} = request.body;
-  db.Users.create(email, password, username)
-      .then(result => {
-          response.render('unauthenticated/login')
+  const {username, password, email, password2} = request.body;
 
-      })
-      .catch(error => {
-        console.log("ERROR", error);
+  if(password !== password2) {
+      response.redirect('/users/register')
+  }else{
+      bcrypt.genSalt(saltRounds, function(err, salt) {
+          bcrypt.hash(password, salt, function(err, hash) {
+              // Store hash in your password DB.
+
+              console.log(password, hash);
+              db.Users.create(email, hash, username)
+                  .then(result => {
+                      response.render('unauthenticated/login')
+
+                  })
+                  .catch(error => {
+                      console.log("ERROR", error);
+                  });
+          });
       });
+  }
+
+
+
 });
 
 module.exports = router;

@@ -1,5 +1,5 @@
 body {
-  background-image: url('../imgs/RiskHomepageBackground.jpg');
+  background-image: url('../resources/images/RiskHomepageBackground.jpg');
   background-repeat: no-repeat, repeat;
   background-size: auto;
   background-color: black;
@@ -15,8 +15,7 @@ h2 {
      -1px 2px 0 #000,
       2px 2px 0 #000;
   font-family: Impact;
-  font-size: 30px;
-  text-align: center;
+  font-size: 24px;
 }
 
 /* Full-width input fields */
@@ -49,7 +48,7 @@ button:hover {
 }
 
 #main-holder {
-  width: 80%;
+  width: 70%;
   height: 100%;
   display: grid;
   justify-items: center;
@@ -112,7 +111,7 @@ span.psw {
 }
 
 .headButtons {
-  width: 33%;
+  width: 25%;
 }
 
 /* Add Zoom Animation */
@@ -156,9 +155,4 @@ span.psw {
   background-color: #3e0869;
   text-shadow: 2px 2px 3px white;
   color: white;
-}
-
-
-.coloredContainer{
-  background-color:#f1f1f1;
 }

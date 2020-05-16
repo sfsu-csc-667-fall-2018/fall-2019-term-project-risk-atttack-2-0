@@ -10,7 +10,7 @@ span
     center [x] Players Currently Logged In
 nav
   button#chatButton.headButtons(onclick="document.getElementById('id01').style.display='block'") Open Chat Window
-  button#settingsButton.headButtons Profile Settings
+  button#settingsButton.headButtons(onclick="location.href='/settings' ") Profile Settings
   button#gamesButton.headButtons(onclick="document.getElementById('id02').style.display='block'") Open List of Joinable Games
   button#gamesButton.headButtons(onclick="location.href='/users/logout' ") Logout
 main#main-holder
@@ -26,7 +26,8 @@ main#main-holder
       This is where more fields would go, if we have them later
       Color, starting countries, etc, can be filled in here, in the format as above.
       //
-    input#creation-submit(type='submit' value='Create Game!')
+    //input#creation-submit(type='submit' value='Create Game!')
+    input#creation-submit(onclick="location.href='/games/24' value='Create Game!'")
 #id01.modal
   form.modal-content.animate(action='/action_page.php' method='post')
     .container(style='background-color:#f1f1f1')
