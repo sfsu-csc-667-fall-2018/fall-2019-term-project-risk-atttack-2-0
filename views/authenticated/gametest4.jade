@@ -4,9 +4,10 @@ script(type='text/javascript' src='javascripts/imageSwitch.js')
 - var armies = 500;
   
 script.
-    //- testgetGameState();
     getGameState();
-    updateMap();
+    getOwnerId();
+    test();
+    fuck();
 
   
 doctype html
@@ -14,7 +15,7 @@ html
     head
         title RiskAttack 2.0 Homepage         
         link(href='/css/test.css', type="text/css", rel='stylesheet')
-
+        
     body
         h1.h11 Game Room 
         h2.h11 Player ID: #{playerId} - Armies: #{armies}
@@ -24,6 +25,8 @@ html
       include ./map/tophalf.jade
     div.parentflex
       include ./map/botthomhalf.jade
+
+      
 
 
 

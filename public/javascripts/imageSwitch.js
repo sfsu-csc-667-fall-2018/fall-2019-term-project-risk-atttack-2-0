@@ -1,33 +1,35 @@
 var game_id = 1;
-var game_state =[];
-fetch('/gamestest4',
-    { method: 'PUT',
-      body: JSON.stringify({ game_id }),
-      headers: {
-      'Content-Type': 'application/json'
-    }})
-    .then(response => response.json())
-    .then(data => game_state.push(data[0]))
-    .catch(error => console.log(error))
+var game_state ={};
 
 
 
+function getGameState(param){
+  fetch('/gamestest4',
+      { method: 'PUT',
+        body: JSON.stringify({game_id}),
+        headers: {
+        'Content-Type': 'application/json'
+      }})
+      .then(response => response.json())
+      .then(data => data.game_state.param)
 
-
-function getGameState(){
-  // const game_state = data;
-  console.log(game_state.game_id);
+      .catch(error => console.log(error))
 
 }
 
 
-function updateMap(mapId){
-  var ownerColumn = "t" + mapId + "_owner";
-  var armiesColumn = "t" + mapId + "_armies";
+function fuck(){
+ let hostEmailData  = await fetch(`/gamestest4`,
+   { method: 'POST',
+     body: JSON.stringify({ game_id }),
+     headers: {
+     'Content-Type': 'application/json'
+   }})
 
-  console.log(game_state);
+ //use string literals
+ let hostEmailJson = await hostEmailData.json();
+ return hostEmailJson;
 }
-
 
 
 function updateGameState(mapId, playerId){
@@ -42,6 +44,35 @@ function updateGameState(mapId, playerId){
       .then(data => console.log(data))
       .catch(error => console.log(error))
 }
+
+
+function getOwnerId(){
+  // console.log(game_state.test);
+}
+
+function test(){
+  var test = getGameState("game_id")
+  console.log(test);
+}
+
+
+
+
+
+
+
+
+
+
+
+function updateMap(mapId){
+  var ownerColumn = "t" + mapId + "_owner";
+  var armiesColumn = "t" + mapId + "_armies";
+
+  console.log(game_state.game_id);
+}
+
+
 
 
 

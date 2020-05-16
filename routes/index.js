@@ -12,11 +12,6 @@ router.get('/', function(req, res, next) {
   response.send('respond with a resource');
   response.render('unauthenticated/login')
 });*/
-router.get('/gamestest', function(request, response) {
-
-    response.render('authenticated/gametest')
-});
-
 
 
 router.get('/gamestest4', function(request, response) {
@@ -26,13 +21,42 @@ router.get('/gamestest4', function(request, response) {
 
 
 router.put('/gamestest4', function(request, response) {
-  db.any(`SELECT * from game_state where game_id = '${request.body.game_id}'`)
-          .then(results => response.json(results))
-          .catch(error => {
-              console.log(error);
-              response.json({error})
-          });
+  const {game_id} = request.body;
+
+
+  db.GameState.getGameState(game_id)
+    .then(result => {
+        console.log(result.game_id);
+        response.json({game_state: result});
+    })
+    .catch(error => {
+      console.log("ERROR", error);
+    });
 });
+
+
+
+
+
+
+
+
+
+router.post('/gamestest4', function(request, response) {
+  const {game_id} = request.body;
+
+
+  db.GameState.getGameState(game_id)
+    .then(result => {
+        console.log("result");
+        response.json({game_state: "result"});
+    })
+    .catch(error => {
+      console.log("ERROR", error);
+    });
+});
+
+
 
 
 
