@@ -16,7 +16,7 @@ function updateGameState(mapId, playerId, armies, src){
   var value = (playerId != 0) ? playerId : armies;
   var column = (playerId != 0) ? ("t" + mapId + "_owner") : ("t" + mapId + "_armies");
 
-  fetch('/gamestest4',
+  fetch('/games/gameState',
       {
           method: 'POST',
           headers: {
@@ -41,7 +41,7 @@ function getGameState(mapId, src){
   var owner = "t" +mapId+ "_owner";
   var armies = "t" +mapId+ "_armies";
 
-  fetch('/gamestest4',
+  fetch('/games/gameState',
       { method: 'PUT',
         body: JSON.stringify({game_id}),
         headers: {

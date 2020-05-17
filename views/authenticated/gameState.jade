@@ -1,9 +1,8 @@
-script(type='text/javascript' src='javascripts/imageSwitch.js')
+script(type='text/javascript' src='/javascripts/mapFunctions.js')
 
 - var playerId = 4;
 - var armies = 800;
   
-
 
   
 doctype html
@@ -14,6 +13,8 @@ html
         link(href='/css/map.css', type="text/css", rel='stylesheet')
 
     body
+        include ./navbar.jade
+        br
         h1.h11 Game Room 
         h2.h11 Player ID: #{playerId} - Armies: #{armies}
     
@@ -27,4 +28,4 @@ html
     //-   include ./map/botthomhalf.jade
 
 script.
-    reloadGameState(); 
+    //- reloadGameState(); 

@@ -11,7 +11,7 @@ html {
     display: grid;
     justify-items: center;
     align-items: center;
-    background-image: url('resources/RiskBackground.jpg');
+    background-image: url('../imgs/RiskBackground.jpg');
     background-repeat: no-repeat, repeat;
     background-size: cover;
     text-shadow: 5px 5px 4px white;
