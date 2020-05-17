@@ -4,16 +4,14 @@ var db = require('../db');
 
 
 router.post('/creategame', function(request, response) {
-
     const {name} = request.body;
     var players = 4;
     var password = '';
 
     db.Game.createGame(name, players, password)
       .then(result => {
-
           console.log(result[0].id);
-          response.redirect("/games/gameState?id=" + result[0].id)
+          response.redirect("/games/creategameState?id=" + result[0].id)
       })
       .catch(error => {
         console.log("ERROR", error);
@@ -21,17 +19,15 @@ router.post('/creategame', function(request, response) {
 });
 
 
-router.get('/gameState', function(request, response) {
+// need to prevent creating multiple game states per game id
+router.get('/creategameState', function(request, response) {
     console.log("here 2" , request.query.id);
-
     var game_id = request.query.id;
-
-    console.log("here 2" , game_id);
 
 
     db.GameState.createGameState(game_id)
       .then(result => {
-          response.render('authenticated/gameState')
+        response.redirect("/games/gameState?id=" + game_id)
       })
       .catch(error => {
         console.log("ERROR", error);
@@ -40,19 +36,39 @@ router.get('/gameState', function(request, response) {
 });
 
 
-router.put('/gameState', function(request, response) {
-  const {game_id} = request.body;
+router.get('/gameState', function(request, response) {
+    console.log("here 3" , request.query.id);
+    var game_id = request.query.id;
 
 
-  db.Game.createGame(game_id)
+    db.GameState.getGameState(game_id)
+      .then(result => {
+        response.render('authenticated/gameState', {game_id: game_id}) 
+      })
+      .catch(error => {
+        console.log("ERROR", error);
+      });
+
+});
+
+
+
+
+
+router.get('/getgameState', function(request, response) {
+  const game_id = request.query.id;
+
+  console.log("here 4" , game_id);
+
+  db.GameState.getGameState(game_id)
     .then(result => {
-        console.log(result.game_id);
         response.json({game_state: result});
     })
     .catch(error => {
       console.log("ERROR", error);
     });
 });
+
 
 
 

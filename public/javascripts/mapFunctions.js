@@ -1,17 +1,17 @@
-var game_id = 1;
-
-function reloadGameState(){
+function reloadGameState(game_id){
+  console.log(game_id)
 
   for(i = 1; i < 39; i++){
     var element = document.getElementById(i);
     var source = element.src;
 
-    getGameState(i, source);
+    getGameState(i, source, game_id);
   }
 }
 
 
-function updateGameState(mapId, playerId, armies, src){
+function updateGameState(mapId, playerId, armies, game_id, src){
+  console.log(game_id);
 
   var value = (playerId != 0) ? playerId : armies;
   var column = (playerId != 0) ? ("t" + mapId + "_owner") : ("t" + mapId + "_armies");
@@ -30,20 +30,19 @@ function updateGameState(mapId, playerId, armies, src){
       })
       .then(response => console.log(response.text()))
       .then(data =>
-        getGameState(mapId, src)
+        getGameState(mapId, src, game_id)
       )
       .catch(error => console.log(error))
 }
 
 
-// function getGameState(mapId, playerId, armies, src){
-function getGameState(mapId, src){
+function getGameState(mapId, src, game_id){
   var owner = "t" +mapId+ "_owner";
   var armies = "t" +mapId+ "_armies";
+  console.log(game_id);
 
-  fetch('/games/gameState',
-      { method: 'PUT',
-        body: JSON.stringify({game_id}),
+  fetch('/games/getgameState?id='+game_id,
+      { method: 'GET',
         headers: {
         'Content-Type': 'application/json'
       }})
@@ -54,6 +53,26 @@ function getGameState(mapId, src){
       )
       .catch(error => console.log(error))
 }
+
+
+// function getGameState(mapId, playerId, armies, src){
+// function getGameState(mapId, src, game_id){
+//   var owner = "t" +mapId+ "_owner";
+//   var armies = "t" +mapId+ "_armies";
+//
+//   fetch('/games/gameState',
+//       { method: 'PUT',
+//         body: JSON.stringify({game_id}),
+//         headers: {
+//         'Content-Type': 'application/json'
+//       }})
+//       .then(response => response.json())
+//       .then(data =>
+//
+//         updateImage(mapId, data.game_state[owner], data.game_state[armies], src)
+//       )
+//       .catch(error => console.log(error))
+// }
 
 
 
@@ -72,12 +91,12 @@ function updateImage(mapId, ownerId, armies, src){
 
 
 
-function updateTerritory(mapId, playerId, armies, src){
+function updateTerritory(mapId, playerId, armies, game_id, src){
     // this gets called when territory is clicked
     //call game logic functions
     // if shit needs to be update, call get/update game state
 
-  updateGameState(mapId, playerId, armies, src)
+  updateGameState(mapId, playerId, armies, game_id, src)
 }
 
 

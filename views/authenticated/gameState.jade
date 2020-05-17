@@ -1,21 +1,19 @@
 script(type='text/javascript' src='/javascripts/mapFunctions.js')
 
-- var playerId = 4;
-- var armies = 800;
-  
+- var playerId = 3;
+//- - var armies = 800;
+
 
   
 doctype html
 html
     head
         title RiskAttack 2.0 Homepage         
-        //- link(href='/css/test.css', type="text/css", rel='stylesheet')
         link(href='/css/map.css', type="text/css", rel='stylesheet')
 
     body
         include ./navbar.jade
-        br
-        h1.h11 Game Room 
+        h1.h11 Game Room #{game_id}
         h2.h11 Player ID: #{playerId} - Armies: #{armies}
     
     
@@ -28,4 +26,5 @@ html
     //-   include ./map/botthomhalf.jade
 
 script.
-    //- reloadGameState(); 
+  console.log("test: ", #{game_id})
+  reloadGameState(#{game_id}); 

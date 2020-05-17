@@ -14,7 +14,7 @@ span
 
 main#main-holder
   | Create Personal Game
-  form#creation-form(action="games/creategame", method='POST')
+  form#creation-form(action="/games/creategame", method='POST')
     label(for='name')
       b Game Name:
     input#creation-players-field.creation-field(type='text' name='name' placeholder='Enter a name')
