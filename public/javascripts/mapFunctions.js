@@ -13,8 +13,9 @@ function reloadGameState(game_id){
 function updateGameState(mapId, playerId, armies, game_id, src){
   console.log(game_id);
 
-  var value = (playerId != 0) ? playerId : armies;
-  var column = (playerId != 0) ? ("t" + mapId + "_owner") : ("t" + mapId + "_armies");
+  // need to change
+  var value = (playerId != 0 && armies == 0) ? playerId : armies;
+  var column = (playerId != 0 && armies == 0) ? ("t" + mapId + "_owner") : ("t" + mapId + "_armies");
 
   fetch('/games/gameState',
       {
@@ -29,7 +30,7 @@ function updateGameState(mapId, playerId, armies, game_id, src){
           })
       })
       .then(response => console.log(response.text()))
-      .then(data =>
+      .then(
         getGameState(mapId, src, game_id)
       )
       .catch(error => console.log(error))
@@ -81,6 +82,9 @@ function updateImage(mapId, ownerId, armies, src){
   var image =  document.getElementById(mapId);
 
   image.src = basePath + playerColor(ownerId);
+
+  // var text =  document.getElementById("div"+mapId);
+  // text.innerHTML = armies;
 
   if (armies != 0){
     var text =  document.getElementById("div"+mapId);

@@ -43,7 +43,7 @@ router.get('/gameState', function(request, response) {
 
     db.GameState.getGameState(game_id)
       .then(result => {
-        response.render('authenticated/gameState', {game_id: game_id}) 
+        response.render('authenticated/gameState', {game_id: game_id})
       })
       .catch(error => {
         console.log("ERROR", error);
@@ -81,9 +81,9 @@ router.post('/gameState', function(request, response) {
       .then(response.send("Shits been updated yo "))
 
     // .then(result => {
-
-        // console.log("result");
-        // response.json({game_state: "result"});
+    //
+    //     console.log("hereeee ", result);
+    //     response.json({game_state: result});
     // })
     .catch(error => {
       console.log("ERROR", error);
