@@ -12,10 +12,9 @@ function reloadGameState(game_id){
 
 function updateGameState(mapId, playerId, armies, game_id, src){
   console.log(game_id);
+  var owner_column = ("t" + mapId + "_owner");
+  var armies_column = ("t" + mapId + "_armies");
 
-  // need to change
-  var value = (playerId != 0 && armies == 0) ? playerId : armies;
-  var column = (playerId != 0 && armies == 0) ? ("t" + mapId + "_owner") : ("t" + mapId + "_armies");
 
   fetch('/games/gameState',
       {
@@ -25,8 +24,10 @@ function updateGameState(mapId, playerId, armies, game_id, src){
           },
           body:JSON.stringify({
             game_id: game_id,
-            column: column,
-            value: value
+            owner_column: owner_column,
+            armies_column: armies_column,
+            playerId: playerId,
+            armies: armies
           })
       })
       .then(response => console.log(response.text()))

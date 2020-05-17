@@ -73,11 +73,11 @@ router.get('/getgameState', function(request, response) {
 
 
 router.post('/gameState', function(request, response) {
-  const {game_id, column, value} = request.body;
+  const {game_id, owner_column, playerId, armies_column, armies} = request.body;
 
-  console.log("Here 1", column, value, game_id);
+  console.log("Here 1", game_id, owner_column, playerId, armies_column, armies);
 
-  db.GameState.updateGameState(column, value, game_id)
+  db.GameState.updateGameState(game_id, owner_column, playerId, armies_column, armies)
       .then(response.send("Shits been updated yo "))
 
     // .then(result => {
