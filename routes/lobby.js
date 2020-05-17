@@ -1,10 +1,13 @@
-var express = require('express');
-var router = express.Router();
+//todo
+const express = require('express');
+const router = express.Router();
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 /* GET users listing. */
-router.get('/', function(_, response) {
-    //response.send('respond with a resource');
-    response.render('authenticated/lobby')
+router.get('/',
+    ensureLoggedIn("/users/login"),
+    function(request, response) {
+            response.render('authenticated/lobby')
 });
 
 module.exports = router;

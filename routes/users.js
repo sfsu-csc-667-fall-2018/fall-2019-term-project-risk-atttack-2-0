@@ -2,80 +2,88 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 const passport = require('../authorization');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'and_the_crowd_goes_rtj';
 
 /* GET users listing. */
 router.get('/login', function (request, response) {
-
-    console.log(request.flash());
-    response.render('unauthenticated/login', {
-        message: request.flash()
-    })
-
-
-  /*db.Users.findByEmailAndPassword("Belmeurrr@gmail.com", "password");*/
+    response.render('unauthenticated/login')
 });
-router.post('/login',
+
+router.post('/login', /*(request, response) =>   {
+        const {password} = request.body;
+        console.log("We are in login post and the password received is: ", password);
+
+
+        /!*bcrypt.genSalt(saltRounds, function (err, salt) {
+            bcrypt.hash(password, salt, function (err, hash) {
+                // Store hash in your password DB.
+                request.password = hash;
+
+            });
+
+        })*!/
+},*/
     passport.authenticate('local', {
+
         failureRedirect: '/users/login',
         failureFlash: true
     }),
-    (_, response ) =>
-    response.redirect('/lobby')
-)
-/*router.post('/login',
-    passport.authenticate('local'),
-    function(req, res) {
-        // If this function gets called, authentication was successful.
-        // `req.user` contains the authenticated user.
-        res.redirect('/lobby');
-    });*/
-/*router.post('/login',/!*(request, response ) => {
-        const {username, password} = request.body;
-        console.log(username, password);
-        response.json(request.body)
-    }*!/
-        passport.authenticate('local',
+        function (request, response) {
+            //request.session.save();
+            const {username} = request.body;
+            //console.log("The password for said user is: ", db.Users.getHash(username));
+            response.redirect('/lobby');
+        }/*,
+    function (request, response) {
+        const {password} = request.body;
+        bcrypt.genSalt(saltRounds, function (err, salt) {
+            bcrypt.hash(password, salt, function (err, hash) {
+                // Store hash in your password DB.
+                request.password = hash;
 
-        {failureRedirect: '/login',
-            successRedirect: '/lobby' })
-        //(request, response) =>
-            //console.log(JSON.stringify(request.body))
-                //.then(response.redirect('/lobby'))
-            )
-            /!*function(req, res) {
-                // If this function gets called, authentication was successful.
-                // `req.user` contains the authenticated user.
-                res.redirect('/lobby')}*!/
+            });
 
-;*/
+        })
+    }*/
+);
+
+router.get('/logout', (request, response) => {
+    request.logout();
+    response.redirect('/');
+});
 
 router.get('/register', function (request, response) {
-
-  /*const {username, password} = request.body;
-  console.log(username, password);*/
-  //response.send('respond with a resource');
   response.render('unauthenticated/register')
 });
 
 router.post('/register', (request, response ) => {
-  const {username, password, email} = request.body;
-  console.log(username, password, email);
+  const {username, password, email, password2} = request.body;
 
-  console.log("RETURNING REQUEST INFO" + JSON.stringify(request.body));
+  if(password !== password2) {
+      response.redirect('/users/register')
+  }else{
+      bcrypt.genSalt(saltRounds, function(err, salt) {
+          bcrypt.hash(password, salt, function(err, hash) {
+              // Store hash in your password DB.
 
-  db.Users.create(email, password, username)
-      .then(result => {
-        //response.json(result)
-          response.render('unauthenticated/login')
+              console.log(password, hash);
+              db.Users.create(email, hash, username)
+                  .then(result => {
+                      response.render('unauthenticated/login')
 
-      })
-      .catch(error => {
-        console.log("ERROR", error);
-        // response.json(error)
+                  })
+                  .catch(error => {
+                      console.log("ERROR", error);
+                  });
+          });
       });
+  }
 
 
-  //response.json(request.body);
+
 });
 
 module.exports = router;

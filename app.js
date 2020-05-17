@@ -3,8 +3,9 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const session = require('express-session');
+let session = require('express-session');
 const flash = require('connect-flash');
+const bodyParser = require('body-parser');
 
 //console.log("NODE ENV IS " + process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'development') {
@@ -43,14 +44,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(
   {
     secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false
+    saveUninitialized: true,
+    resave: true
   }));
 
-app.use(flash())
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.urlencoded({extended: true}));
+
+
+app.use(flash());
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
