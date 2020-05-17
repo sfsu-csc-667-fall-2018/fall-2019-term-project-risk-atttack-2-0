@@ -1,0 +1,115 @@
+Game starts
+
+Game Setup{
+	//for now we are expecting 4 players
+		//if we want to play with different amount of players
+		//If 2 are playing, see special instructions.
+		//If 3 are playing, each player counts out 35 Infantry.
+		//If 4 are playing, each player counts out 30 Infantry.
+		//If 5 are playing, each player counts out 25 Infantry.
+		//If 6 are playing, each player counts out 20 Infantry.
+	everybody gets 30 armies to place
+		
+	players all roll dice, highest roll goes first and so on
+	game distributes random territories to all players one at a time
+		//optional let players choose territories one at a time in turn order
+	
+	After all 42 territories are claimed, each player in turn places  
+		one additional army onto any territory he or she already occupies.
+		//if we want to speed this up we dont limit it by turn, everybody can at once
+		
+	START GAME CYCLE
+}
+
+
+
+NOW IN GAME CYCLE
+	add initial armies to owned territories{
+	//required phase
+	
+			//calculate number of territories to place
+			//The number of territories you occupy.
+			//The value of the continents you control.
+			//The value of the matched sets of RISK cards you trade in.
+			//The specific territory pictured on a traded-in card.
+		#of armies to place = total territories player owns / 3 (round down)
+		minimum 3
+		additional armies if you own a continent
+			Asia: 7
+			North America: 5
+			Europe: 5
+			Africa: 3
+			South America: 2
+			Australia: 2
+			
+		check if a player has set of cards 
+			OR if player has 5 or more cards they must trade in
+				if so ask if they want to trade in
+				display amount of armies they would get
+				
+			valid set of cards entails 3 of the same card (infintry, infintry, infintry)
+				OR 1 of each card (infintry, calvery, armor 
+				//OPTIONAL WILDCARD CARDS
+				
+			sets traded in values will increase for each set is traded in regardless
+				of player turning in card
+					First trade in: +4 armies
+					Second trade in: +6 armies
+					Third trade in:	+8 armies
+					Fourth trade in: +10 armies
+					fifth and each after is another +5 armies to previous reward
+					
+			// optional imo
+				Occupied territories: If any of the 3 cards you trade in shows the
+				picture of a territory you occupy, you receive 2 extra armies.
+				You must place both those armies onto that particular territory.
+	}
+	startAttackPhase button =>
+		Attack Phase
+			{
+				//optional phase
+				//can only attack territories adjacent to your own or connected
+					by dashed line
+				//must always have 2 armies in the territory your're attacking from
+				//can stop attacking a territory at any time
+				//can attack multiple times per turn
+				
+				To Attack
+					select your territory then the enemy territory
+						verify valid attack
+					broadcast an attack has begun
+					attacker will decide how many dice they want to roll 1, 2, or 3
+						defender rolls one less dice
+						attacker must have one more army in territory than dice rolled
+						defender must have 2 armies to roll 2 dice
+				
+				Decide Battle
+					all ties go to defender
+					sort dice highest to lowest
+					compare attackers and defenders highest roll
+						loser loses an army
+					if defender rolled 2 dice
+						compare next highest of each roll
+						loser loses an army
+			}
+	startFortifyPhase button =>
+		fortify positions
+			{
+				//optional phase
+				can only fortify once //maybe an implimentation decision?
+				
+				can move armies from one friendly territory to another so long
+					as they are adjacent //again maybe an implimentation decision
+				can move as many armies as the want between the two territories
+					but must keep 1 armies in all owned territories at all time
+			}
+	endTurn button =>
+	{
+		check if winner
+			{
+				does current player own all territories?
+					do this by getting # of rows in territories table and compring 
+					# of owned territories in player table
+			}
+		next players turn
+	}
