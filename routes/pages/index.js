@@ -11,4 +11,5 @@ router.get('/users/register', (_, res) => {
     res.render('unauthenticated/register')
 });
 
+
 module.exports = router;
