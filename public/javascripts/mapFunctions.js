@@ -156,3 +156,8 @@ function playerColor(playerId){
 
   return color;
 }
+
+
+// SELECT *
+// FROM testing
+// WHERE 'foo' in (col1, col2, col3, . . . );
