@@ -1,8 +1,10 @@
+script(type='text/javascript' src='/javascripts/lobby.js')
+
 doctype html
 head
   title RiskAttack 2.0 Homepage
   meta(name='viewport' content='width=device-width, initial-scale=1')
-  link(rel='stylesheet' href='css/HomepageStyle.css')
+  link(rel='stylesheet' href='/css/HomepageStyle.css')
 
   include ./navbar.jade
   h2
@@ -18,4 +20,17 @@ head
       input#creation-submit(type='submit' value='Create Game')
     br
     
-    
+  div.bottomContianer
+    div.half
+        h2 Your Games
+        div#gameBox.whitebox
+          p words words words words words words words words words
+  
+    div.half
+        div.chatbox
+          include ./chatBox.jade
+
+      //- include ./chatBox.jade
+
+script.
+  
