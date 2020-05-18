@@ -5,6 +5,11 @@ body {
   background-color: black;
 }
 
+.hacky{
+  display: none;
+}
+
+
 .nav{
   text-align: center;;
 }

@@ -12,6 +12,7 @@ const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true
 });
 
+
 const socket = io();
 
 // Join chatroom
@@ -20,7 +21,7 @@ socket.emit('joinRoom', { username, room });
 // Get room and users
 socket.on('roomUsers', ({ room, users }) => {
   // outputRoomName(room);
-  outputPlayer(playerName);
+  // outputPlayer(playerName);
   // outputUsers(users);
 });
 

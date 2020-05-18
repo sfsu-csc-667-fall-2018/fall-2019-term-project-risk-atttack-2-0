@@ -1,4 +1,5 @@
 script(type='text/javascript' src='/javascripts/lobby.js')
+script(src='/socket.io/socket.io.js')
 
 doctype html
 head
@@ -9,6 +10,8 @@ head
   include ./navbar.jade
   h2
     center#name Welcome to Central Command, #{username}
+    p#playername.hacky #{username}
+
     
   body
   div.main-holder
