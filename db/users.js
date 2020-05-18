@@ -15,8 +15,8 @@ const findByUsernameAndPassword = (username, password) =>
 const getHash = (username) =>
     db.one("SELECT id, createdat, password FROM users WHERE username=${username}", {username} );
 
-const findByName = (username) =>
-    db.one("SELECT id FROM users WHERE username=${username}", {username} );
+const findByName = (player1, player2, player3, player4) =>
+    db.any("SELECT id, username FROM users WHERE (username=${player1}) or (username=${player2}) or (username=${player3}) or (username=${player4}) ", {player1, player2, player3, player4} );
 
 module.exports = {
   create,

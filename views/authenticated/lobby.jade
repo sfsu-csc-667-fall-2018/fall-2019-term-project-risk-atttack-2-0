@@ -1,5 +1,6 @@
-script(type='text/javascript' src='/javascripts/lobby.js')
 script(src='/socket.io/socket.io.js')
+
+
 
 doctype html
 head
@@ -16,10 +17,16 @@ head
   body
   div.main-holder
     | Create A New Game
-    form#creation-form(action="/games/creategame?user=#{username}" , method='POST')
+    form#creation-form
       label(for='name')
         b Game Name:
-      input#creation-players-field.creation-field(type='text' name='name' placeholder='Enter a name')
+      input#creation.creation-field(type='text' name='name' placeholder='Enter a name')
+      label(for='players')
+        b Find and Add Other Players:
+      div.inline
+        input#player2.login-form-field(type='text' name='player2' placeholder='Player 2')
+        input#player3.login-form-field(type='text' name='player3' placeholder='Player 3')
+        input#player4.login-form-field(type='text' name='player4' placeholder='Player 4')
       input#creation-submit(type='submit' value='Create Game')
     br
     
@@ -33,9 +40,9 @@ head
         div.chatbox
           include ./chatBox.jade
 
-      //- include ./chatBox.jade
 
-      
+
+script(type='text/javascript' src='/javascripts/lobby.js')
 script.
   listGames("#{username}");
   

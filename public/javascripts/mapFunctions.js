@@ -89,25 +89,6 @@ function getGameState(mapId, src, game_id){
 }
 
 
-// function getGameState(mapId, playerId, armies, src){
-// function getGameState(mapId, src, game_id){
-//   var owner = "t" +mapId+ "_owner";
-//   var armies = "t" +mapId+ "_armies";
-//
-//   fetch('/games/gameState',
-//       { method: 'PUT',
-//         body: JSON.stringify({game_id}),
-//         headers: {
-//         'Content-Type': 'application/json'
-//       }})
-//       .then(response => response.json())
-//       .then(data =>
-//
-//         updateImage(mapId, data.game_state[owner], data.game_state[armies], src)
-//       )
-//       .catch(error => console.log(error))
-// }
-
 
 
 function updateImage(mapId, ownerId, armies, src){

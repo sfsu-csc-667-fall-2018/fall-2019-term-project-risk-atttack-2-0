@@ -89,4 +89,29 @@ router.post('/register', (request, response ) => {
 
 
 
+router.post('/findGameUsers', function(request, response) {
+    console.log("User here: ");
+
+    var player1 = request.body.player1;
+    var player2 = request.body.player2;
+    var player3 = request.body.player3;
+    var player4 = request.body.player4;
+
+    console.log(player1);
+    console.log(player2);
+    console.log(player3);
+    console.log(player4);
+
+
+    db.Users.findByName(player1, player2, player3, player4)
+      .then(result => {
+        response.json(result);
+      })
+      .catch(error => {
+        console.log("ERROR", error);
+      });
+});
+
+
+
 module.exports = router;

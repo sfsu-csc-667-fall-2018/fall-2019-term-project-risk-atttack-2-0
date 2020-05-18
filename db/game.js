@@ -1,8 +1,8 @@
 const db = require('./connection.js');
 
-const createGame = (name, players, password, user_id1) =>
-  db.any("INSERT INTO game (name, players, password, user_id1) VALUES ($1, $2, $3, $4) RETURNING id",
-            [name, players, password, user_id1] );
+const createGame = (name, players, password, player1, player2, player3, player4) =>
+  db.any("INSERT INTO game (name, players, password, user_id1, user_id2, user_id3, user_id4) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id",
+            [name, players, password, player1, player2, player3, player4] );
 
 
 const getGameInfo = (id) =>
