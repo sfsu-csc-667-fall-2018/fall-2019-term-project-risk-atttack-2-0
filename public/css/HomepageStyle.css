@@ -51,9 +51,9 @@ button:hover {
   color: white;
 }
 
-#main-holder {
+.main-holder {
   width: 70%;
-  height: 100%;
+  max-height: 10%;
   display: grid;
   justify-items: center;
   align-items: center;

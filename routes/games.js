@@ -4,14 +4,12 @@ var db = require('../db');
 
 
 router.post('/creategame', function(request, response) {
-    const {name} = request.body;
-    var players = 4;
-    var password = '';
+    var user = request.query.user;
+    var gamename = request.body.name;
 
-    db.Game.createGame(name, players, password)
+    db.Users.getHash(user)
       .then(result => {
-          console.log(result[0].id);
-          response.redirect("/games/creategameState?id=" + result[0].id)
+        response.redirect("/games/gameStateSetUp?uid=" + result.id + "&gamename=" + gamename)
       })
       .catch(error => {
         console.log("ERROR", error);
@@ -19,11 +17,28 @@ router.post('/creategame', function(request, response) {
 });
 
 
-// need to prevent creating multiple game states per game id
-router.get('/creategameState', function(request, response) {
-    console.log("here 2" , request.query.id);
-    var game_id = request.query.id;
 
+router.get('/gameStateSetUp', function(request, response) {
+    var user_id1 = request.query.uid;
+    var name = request.query.gamename;
+    var players = 4;
+    var password = '';
+
+    db.Game.createGame(name, players, password, user_id1)
+      .then(result => {
+          console.log(result[0].id);
+          response.redirect("/games/creategameState?id=" + result[0].id)
+      })
+      .catch(error => {
+        console.log("ERROR", error);
+      });
+
+});
+
+
+
+router.get('/creategameState', function(request, response) {
+    var game_id = request.query.id;
 
     db.GameState.createGameState(game_id)
       .then(result => {
@@ -32,12 +47,10 @@ router.get('/creategameState', function(request, response) {
       .catch(error => {
         console.log("ERROR", error);
       });
-
 });
 
 
 router.get('/gameState', function(request, response) {
-    console.log("here 3" , request.query.id);
     var game_id = request.query.id;
 
 
@@ -57,8 +70,6 @@ router.get('/gameState', function(request, response) {
 
 router.get('/getgameState', function(request, response) {
   const game_id = request.query.id;
-
-  console.log("here 4" , game_id);
 
   db.GameState.getGameState(game_id)
     .then(result => {
@@ -85,13 +96,22 @@ router.post('/gameState', function(request, response) {
       console.log("ERROR", error);
     });
 });
-// response.send("Shits been updated yo "))
 
-// .then(result => {
-//
-//     console.log("hereeee ", result);
-//     response.json({game_state: result});
-// })
+
+router.get('/getGameInfo', function(request, response) {
+  const game_id = request.query.id;
+
+
+  db.Game.getGameInfo(game_id)
+    .then(result => {
+        response.json(result);
+    })
+    .catch(error => {
+      console.log("ERROR", error);
+    });
+});
+
+
 
 
 

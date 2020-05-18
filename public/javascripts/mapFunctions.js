@@ -9,6 +9,38 @@ function reloadGameState(game_id){
   }
 }
 
+function getGameInfo(game_id){
+
+
+  fetch('/games/getGameInfo?id=' + game_id,
+      {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
+      .then(response => response.json())
+      .then(data =>
+          gameInfoHtml(data.name)
+
+      )
+      .catch(error => console.log(error))
+}
+
+
+function gameInfoHtml(game_name){
+  var header =  document.getElementById("header");
+  header.innerHTML = "Game Room: " + game_name;
+  //
+  // var players =  document.getElementById("players");
+  // players.innerHTML = "Players: " + game_name;
+  //
+
+
+}
+
+
+
 
 function updateGameState(mapId, playerId, armies, game_id, src){
   console.log(game_id);
