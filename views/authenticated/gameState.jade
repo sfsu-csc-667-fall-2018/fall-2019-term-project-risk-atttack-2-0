@@ -15,7 +15,7 @@ html
     body
         include ./navbar.jade
         h1#header.h11 Game Room: 
-        p#players.players Test tes test
+        //- p#players.players Test tes test
         //- h2#player.h11 Player #{playerId}
         p#playername.hacky Player #{playerId}
     
@@ -33,6 +33,6 @@ html
     //-   include ./map/botthomhalf.jade
 
 script.
-  console.log("test: ", #{game_id})
+  console.log("test: ", "#{username}")
   getGameInfo(#{game_id}); 
   reloadGameState(#{game_id}); 

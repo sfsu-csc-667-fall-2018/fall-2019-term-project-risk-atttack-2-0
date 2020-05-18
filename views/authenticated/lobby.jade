@@ -8,12 +8,12 @@ head
 
   include ./navbar.jade
   h2
-    center Welcome to Central Command, #{user}
+    center#name Welcome to Central Command, #{username}
     
   body
   div.main-holder
     | Create A New Game
-    form#creation-form(action="/games/creategame?user=#{user}" , method='POST')
+    form#creation-form(action="/games/creategame?user=#{username}" , method='POST')
       label(for='name')
         b Game Name:
       input#creation-players-field.creation-field(type='text' name='name' placeholder='Enter a name')
@@ -24,7 +24,7 @@ head
     div.half
         h2 Your Games
         div#gameBox.whitebox
-          p words words words words words words words words words
+          p#gameList
   
     div.half
         div.chatbox
@@ -32,5 +32,7 @@ head
 
       //- include ./chatBox.jade
 
+      
 script.
+  listGames("#{username}");
   

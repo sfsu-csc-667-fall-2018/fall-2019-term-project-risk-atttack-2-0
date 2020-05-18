@@ -9,7 +9,8 @@ router.post('/creategame', function(request, response) {
 
     db.Users.getHash(user)
       .then(result => {
-        response.redirect("/games/gameStateSetUp?uid=" + result.id + "&gamename=" + gamename)
+        response.redirect("/games/gameStateSetUp?uid=" + result.id
+          + "&gamename=" + gamename + "&username=" + user)
       })
       .catch(error => {
         console.log("ERROR", error);
@@ -19,6 +20,7 @@ router.post('/creategame', function(request, response) {
 
 
 router.get('/gameStateSetUp', function(request, response) {
+    var username = request.query.username;
     var user_id1 = request.query.uid;
     var name = request.query.gamename;
     var players = 4;
@@ -27,7 +29,8 @@ router.get('/gameStateSetUp', function(request, response) {
     db.Game.createGame(name, players, password, user_id1)
       .then(result => {
           console.log(result[0].id);
-          response.redirect("/games/creategameState?id=" + result[0].id)
+          response.redirect("/games/creategameState?id="
+                            + result[0].id + "&username=" + username)
       })
       .catch(error => {
         console.log("ERROR", error);
@@ -38,11 +41,13 @@ router.get('/gameStateSetUp', function(request, response) {
 
 
 router.get('/creategameState', function(request, response) {
+    var username = request.query.username;
     var game_id = request.query.id;
 
     db.GameState.createGameState(game_id)
       .then(result => {
-        response.redirect("/games/gameState?id=" + game_id)
+        response.redirect("/games/gameState?id=" + game_id +
+                            "&username=" + username)
       })
       .catch(error => {
         console.log("ERROR", error);
@@ -51,12 +56,13 @@ router.get('/creategameState', function(request, response) {
 
 
 router.get('/gameState', function(request, response) {
+    var username = request.query.username;
     var game_id = request.query.id;
 
 
     db.GameState.getGameState(game_id)
       .then(result => {
-        response.render('authenticated/gameState', {game_id: game_id})
+        response.render('authenticated/gameState', {game_id: game_id, username:username})
       })
       .catch(error => {
         console.log("ERROR", error);
@@ -105,6 +111,36 @@ router.get('/getGameInfo', function(request, response) {
   db.Game.getGameInfo(game_id)
     .then(result => {
         response.json(result);
+    })
+    .catch(error => {
+      console.log("ERROR", error);
+    });
+});
+
+
+router.get('/getUserGames', function(request, response) {
+  const user = request.query.user;
+  console.log(user);
+
+
+  db.Users.findByName(user)
+    .then(result => {
+      response.redirect("/games/returnUserGames?id=" + result.id)
+    })
+    .catch(error => {
+      console.log("ERROR", error);
+    });
+});
+
+
+router.get('/returnUserGames', function(request, response) {
+  const user_id = request.query.id;
+
+  console.log(user_id);
+
+  db.Game.getUserGames(user_id)
+    .then(result => {
+        response.json(result)
     })
     .catch(error => {
       console.log("ERROR", error);
