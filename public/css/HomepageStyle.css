@@ -5,6 +5,10 @@ body {
   background-color: black;
 }
 
+.nav{
+  text-align: center;;
+}
+
 h2 {
   -webkit-text-stroke: 1px black;
   color: white;

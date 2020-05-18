@@ -16,7 +16,7 @@ socket.emit('joinRoom', { username, room });
 
 // Get room and users
 socket.on('roomUsers', ({ room, users }) => {
-  outputRoomName(room);
+  // outputRoomName(room);
   outputUsers(users);
 });
 
@@ -46,12 +46,10 @@ chatForm.addEventListener('submit',(e) =>{
 
 //output message to DOM
 function outputMessage(message){
-  const div = document.createElement('div');
+  const div = document.createElement('p');
   div.classList.add('message');
-  div.innerHTML = `<p class="meta"> ${message.username} <span>${message.time}</span></p>
-        <p class="text">
-        ${message.text}
-        </p>`;
+  div.innerHTML = `${message.username} - ${message.time}
+        <br/>  ${message.text}`;
   document.querySelector('.chat-messages').appendChild(div);
 }
 
