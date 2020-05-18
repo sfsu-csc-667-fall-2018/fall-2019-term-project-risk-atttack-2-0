@@ -1,4 +1,5 @@
 script(type='text/javascript' src='/javascripts/mapFunctions.js')
+script(src='/socket.io/socket.io.js')
 
 - var playerId = 1;
 - var armies = 60;
@@ -14,11 +15,16 @@ html
     body
         include ./navbar.jade
         h1.h11 Game Room #{game_id}
-        h2.h11 Player ID: #{playerId} - Armies: #{armies}
+        //- h2#player.h11 Player #{playerId}
+        //- p Armies: #{armies}
     
-    
+  dif.mainContainer
     div.parentflexContainer
       include ./map/map.jade
+    div.sideContainer
+      include ./chatBox.jade
+
+
       
     //- div.parentflex
     //-   include ./map/tophalf.jade

@@ -1,0 +1,17 @@
+div.outside
+  div.chat-main
+      h2#room-name Chat Box
+      ul#users
+  div.chat-container
+  
+        
+    div.chat-messages
+      
+  div.chat-form-container
+    form#chat-form
+      input#msg(type='text', placeholder='Enter Message', required='', autocomplete='off')
+      input#creation-submit(type='submit' value='Send Message')
+
+script(src='https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js', integrity='sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4=', crossorigin='anonymous')
+script(src='/socket.io/socket.io.js')
+script(src='/javascripts/chat.js')
