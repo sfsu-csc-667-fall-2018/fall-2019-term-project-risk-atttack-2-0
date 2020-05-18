@@ -7,11 +7,7 @@ const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 router.get('/',
     ensureLoggedIn("/users/login"),
     function(request, response) {
-      var username = request.query.user;
-
-      response.render('authenticated/lobby', {username: username})
-
+            response.render('authenticated/lobby')
 });
-
 
 module.exports = router;

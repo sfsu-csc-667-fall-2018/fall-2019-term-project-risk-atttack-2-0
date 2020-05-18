@@ -1,11 +1,8 @@
 link(rel='stylesheet' href='/css/HomepageStyle.css')
 
-script.
-  console.log("Nav:", "#{username}")
 
-
-nav.nav
-  //- button#settingsButton.headButtons(onclick="location.href='/settings' ") Profile Settings
-
-  button#gamesButton.headButtons(onclick="location.href='/lobby?user=#{username}'") Lobby
+nav
+  button#chatButton.headButtons(onclick="document.getElementById('id01').style.display='block'") Open Chat Window
+  button#settingsButton.headButtons(onclick="location.href='/settings' ") Profile Settings
+  button#gamesButton.headButtons(onclick="document.getElementById('id02').style.display='block'") Open List of Joinable Games
   button#gamesButton.headButtons(onclick="location.href='/users/logout' ") Logout
