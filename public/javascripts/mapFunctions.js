@@ -30,9 +30,9 @@ function updateGameState(mapId, playerId, armies, game_id, src){
             armies: armies
           })
       })
-      .then(response => console.log(response.text()))
-      .then(
-        getGameState(mapId, src, game_id)
+      .then(response => response.json())
+      .then(data =>
+        getGameState(mapId, src, data.game_id)
       )
       .catch(error => console.log(error))
 }

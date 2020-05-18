@@ -3,6 +3,9 @@ const chatMessage = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 
+const playerName = document.getElementById('playername');
+const nameHolder = document.getElementById('playerHolder');
+
 // Get username and room from URL
 //todo: link db user, lobbynum to username, room
 const { username, room } = Qs.parse(location.search, {
@@ -17,7 +20,8 @@ socket.emit('joinRoom', { username, room });
 // Get room and users
 socket.on('roomUsers', ({ room, users }) => {
   // outputRoomName(room);
-  outputUsers(users);
+  outputPlayer(playerName);
+  // outputUsers(users);
 });
 
 
@@ -44,13 +48,33 @@ chatForm.addEventListener('submit',(e) =>{
   e.target.elements.msg.focus();
 });
 
-//output message to DOM
 function outputMessage(message){
+  var name = playerName.innerHTML;
+
   const div = document.createElement('p');
   div.classList.add('message');
-  div.innerHTML = `${message.username} - ${message.time}
+  div.innerHTML = `${name} - ${message.time}
         <br/>  ${message.text}`;
   document.querySelector('.chat-messages').appendChild(div);
+}
+
+//output message to DOM
+// function outputMessage(message){
+//   const div = document.createElement('p');
+//   div.classList.add('message');
+//   div.innerHTML = `${message.username} - ${message.time}
+//         <br/>  ${message.text}`;
+//   document.querySelector('.chat-messages').appendChild(div);
+// }
+
+
+function outputPlayer(player) {
+  var name = playerName.innerHTML;
+  console.log(playerName.innerHTML);
+  nameHolder.innerHTML = `Current Player: ${name}`
+  // playerName.innerHTML = `
+  //   ${users.map(user => `<li>${user.username}</li>`).join('')}
+  // `;
 }
 
 
@@ -62,6 +86,6 @@ function outputRoomName(room) {
 // Add users to DOM
 function outputUsers(users) {
   userList.innerHTML = `
-    ${users.map(user => `<li>${user.username}</li>`).join('')}
+    ${users.map(user => ` - ${user.username}`).join('')}
   `;
 }

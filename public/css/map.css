@@ -1,6 +1,9 @@
 .h11{
   text-align: center;
 }
+.hacky{
+  display: none;
+}
 
 .centerMiddle {
   -webkit-text-stroke: 1px black;

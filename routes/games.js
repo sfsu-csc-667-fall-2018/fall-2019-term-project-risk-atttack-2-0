@@ -78,18 +78,20 @@ router.post('/gameState', function(request, response) {
   console.log("Here 1", game_id, owner_column, playerId, armies_column, armies);
 
   db.GameState.updateGameState(game_id, owner_column, playerId, armies_column, armies)
-      .then(response.send("Shits been updated yo "))
-
-    // .then(result => {
-    //
-    //     console.log("hereeee ", result);
-    //     response.json({game_state: result});
-    // })
+    .then(result => {
+        response.json(result);
+    })
     .catch(error => {
       console.log("ERROR", error);
     });
 });
+// response.send("Shits been updated yo "))
 
+// .then(result => {
+//
+//     console.log("hereeee ", result);
+//     response.json({game_state: result});
+// })
 
 
 

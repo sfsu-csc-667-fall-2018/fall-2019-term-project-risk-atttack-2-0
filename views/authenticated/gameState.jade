@@ -1,7 +1,7 @@
 script(type='text/javascript' src='/javascripts/mapFunctions.js')
 script(src='/socket.io/socket.io.js')
 
-- var playerId = 1;
+- var playerId = 2;
 - var armies = 60;
 
 
@@ -16,7 +16,7 @@ html
         include ./navbar.jade
         h1.h11 Game Room #{game_id}
         //- h2#player.h11 Player #{playerId}
-        //- p Armies: #{armies}
+        p#playername.hacky Player #{playerId}
     
   dif.mainContainer
     div.parentflexContainer
