@@ -3,47 +3,83 @@ const router = express.Router();
 var db = require('../db');
 
 
+
+
 router.post('/creategame', function(request, response) {
-    const {name} = request.body;
+    var user = request.query.user;
+    var gamename = request.body.name;
+
+    db.Users.getHash(user)
+      .then(result => {
+        response.redirect("/games/gameStateSetUp?uid=" + result.id
+          + "&gamename=" + gamename + "&username=" + user)
+      })
+      .catch(error => {
+        console.log("ERROR", error);
+      });
+});
+
+
+
+router.post('/gameSetUp', function(request, response) {
+    var name = request.body.game_name;
+    var username = request.body.username;
+
+    var player1 = request.body.player1;
+    var player2 = request.body.player2;
+    var player3 = request.body.player3;
+    var player4 = request.body.player4;
     var players = 4;
     var password = '';
 
-    db.Game.createGame(name, players, password)
+    console.log("herree: ", username, player1, player2, player3, player4)
+
+
+    db.Game.createGame(name, players, password, player1, player2, player3, player4)
       .then(result => {
-          console.log(result[0].id);
-          response.redirect("/games/creategameState?id=" + result[0].id)
+          response.redirect("/games/createGameState?id="
+                            + result[0].id + "&username=" + username);
       })
       .catch(error => {
         console.log("ERROR", error);
       });
+
 });
 
 
-// need to prevent creating multiple game states per game id
-router.get('/creategameState', function(request, response) {
-    console.log("here 2" , request.query.id);
+
+
+router.get('/createGameState', function(request, response) {
+    var username = request.query.username;
     var game_id = request.query.id;
 
+    console.log("here2: ", username);
 
     db.GameState.createGameState(game_id)
       .then(result => {
-        response.redirect("/games/gameState?id=" + game_id)
+        response.redirect("/games/gameState?id=" + game_id +
+                            "&username=" + username)
       })
       .catch(error => {
         console.log("ERROR", error);
       });
-
 });
 
 
+
+
+
 router.get('/gameState', function(request, response) {
-    console.log("here 3" , request.query.id);
+    var username = request.query.username;
     var game_id = request.query.id;
+
+    console.log("here3: ");
 
 
     db.GameState.getGameState(game_id)
       .then(result => {
-        response.render('authenticated/gameState', {game_id: game_id})
+        response.render('authenticated/gameState', {game_id: game_id, username:username})
+        response.end();
       })
       .catch(error => {
         console.log("ERROR", error);
@@ -57,8 +93,6 @@ router.get('/gameState', function(request, response) {
 
 router.get('/getgameState', function(request, response) {
   const game_id = request.query.id;
-
-  console.log("here 4" , game_id);
 
   db.GameState.getGameState(game_id)
     .then(result => {
@@ -78,17 +112,77 @@ router.post('/gameState', function(request, response) {
   console.log("Here 1", game_id, owner_column, playerId, armies_column, armies);
 
   db.GameState.updateGameState(game_id, owner_column, playerId, armies_column, armies)
-      .then(response.send("Shits been updated yo "))
-
-    // .then(result => {
-    //
-    //     console.log("hereeee ", result);
-    //     response.json({game_state: result});
-    // })
+    .then(result => {
+        response.json(result);
+    })
     .catch(error => {
       console.log("ERROR", error);
     });
 });
+
+
+router.get('/getGameInfo', function(request, response) {
+  const game_id = request.query.id;
+
+
+  db.Game.getGameInfo(game_id)
+    .then(result => {
+        response.json(result);
+    })
+    .catch(error => {
+      console.log("ERROR", error);
+    });
+});
+
+
+router.get('/getUserGames', function(request, response) {
+  const user = request.query.user;
+  console.log("User games: ", user);
+
+
+  db.Users.findByName(user)
+    .then(result => {
+      response.redirect("/games/returnUserGames?id=" + result[0].id)
+    })
+    .catch(error => {
+      console.log("ERROR", error);
+    });
+});
+
+
+router.get('/returnUserGames', function(request, response) {
+  const user_id = request.query.id;
+
+  console.log("here id: ", user_id);
+
+  db.Game.getUserGames(user_id)
+    .then(result => {
+        response.json(result)
+    })
+    .catch(error => {
+      console.log("ERROR", error);
+    });
+});
+
+
+// router.get('/gameStateSetUp', function(request, response) {
+//     var username = request.query.username;
+//     var user_id1 = request.query.uid;
+//     var name = request.query.gamename;
+//     var players = 4;
+//     var password = '';
+//
+//     db.Game.createGame(name, players, password, user_id1)
+//       .then(result => {
+//           console.log(result[0].id);
+//           response.redirect("/games/creategameState?id="
+//                             + result[0].id + "&username=" + username)
+//       })
+//       .catch(error => {
+//         console.log("ERROR", error);
+//       });
+//
+// });
 
 
 
