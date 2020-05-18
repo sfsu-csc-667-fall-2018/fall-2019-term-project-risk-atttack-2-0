@@ -1,62 +1,41 @@
+script(type='text/javascript' src='/javascripts/lobby.js')
+script(src='/socket.io/socket.io.js')
+
 doctype html
 head
   title RiskAttack 2.0 Homepage
   meta(name='viewport' content='width=device-width, initial-scale=1')
-  link(rel='stylesheet' href='css/HomepageStyle.css')
-span
+  link(rel='stylesheet' href='/css/HomepageStyle.css')
+
   include ./navbar.jade
-
-
   h2
-    center Welcome to Central Command, [player]
-  h2#subheader
-    center [x] Players Currently Logged In
+    center#name Welcome to Central Command, #{username}
+    p#playername.hacky #{username}
 
-main#main-holder
-  | Create Personal Game
-  form#creation-form(action="/games/creategame", method='POST')
-    label(for='name')
-      b Game Name:
-    input#creation-players-field.creation-field(type='text' name='name' placeholder='Enter a name')
-    //- 
-    //- label(for='players')
-    //-   b Number of Players:
-    //- input#creation-players-field.creation-field(type='text' name='players' placeholder='Enter a Number 2-4')
-    //- label(for='uname')
-    //-   b Set Password:
-    //- input#password-field.creation-field(type='text' name='password' placeholder='Leave Blank for None')
-    input#creation-submit(type='submit' value='Create Game')
+    
+  body
+  div.main-holder
+    | Create A New Game
+    form#creation-form(action="/games/creategame?user=#{username}" , method='POST')
+      label(for='name')
+        b Game Name:
+      input#creation-players-field.creation-field(type='text' name='name' placeholder='Enter a name')
+      input#creation-submit(type='submit' value='Create Game')
+    br
+    
+  div.bottomContianer
+    div.half
+        h2 Your Games
+        div#gameBox.whitebox
+          p#gameList
+  
+    div.half
+        div.chatbox
+          include ./chatBox.jade
 
+      //- include ./chatBox.jade
 
-#id01.modal
-  form.modal-content.animate(action='/action_page.php' method='post')
-    .container(style='background-color:#f1f1f1')
-      b Global Chat
-    #chatbox
-    .container(style='background-color:#f1f1f1')
-      label(for='uname')
-        b Chatting as: [username]
-      input(type='text' placeholder='Enter Message' name='uname' required='')
-      button(type='submit') Send
-#id02.modal
-  form.modal-content.animate(action='/action_page.php' method='post')
-    .container(style='background-color:#f1f1f1')
-      b Available Lobbies
-    #chatbox
-    .container(style='background-color:#f1f1f1')
-      label(for='password')
-        b Joining as: [username]
-      input(type='text' placeholder='Enter Password (Leave Blank If No Password)' name='password' required='')
-      button(type='submit') Join
+      
 script.
-  var modal = document.getElementById('id01');
-  var modalTwo = document.getElementById('id02');
-  // When the user clicks anywhere outside, close it
-  window.onclick = function(event) {
-  if (event.target == modal) {
-  modal.style.display = "none";
-  }
-  if (event.target == modalTwo) {
-  modalTwo.style.display = "none";
-  }
-  }
+  listGames("#{username}");
+  

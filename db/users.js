@@ -15,10 +15,14 @@ const findByUsernameAndPassword = (username, password) =>
 const getHash = (username) =>
     db.one("SELECT id, createdat, password FROM users WHERE username=${username}", {username} );
 
+const findByName = (username) =>
+    db.one("SELECT id FROM users WHERE username=${username}", {username} );
+
 module.exports = {
   create,
   findByEmailAndPassword,
   findById,
+  findByName,
   findByUsernameAndPassword,
   getHash
 };

@@ -35,7 +35,9 @@ router.post('/login', /*(request, response) =>   {
             //request.session.save();
             const {username} = request.body;
             //console.log("The password for said user is: ", db.Users.getHash(username));
-            response.redirect('/lobby');
+            console.log(username);
+
+            response.redirect('/lobby?user=' + username);
         }/*,
     function (request, response) {
         const {password} = request.body;
@@ -82,8 +84,9 @@ router.post('/register', (request, response ) => {
       });
   }
 
-
-
 });
+
+
+
 
 module.exports = router;

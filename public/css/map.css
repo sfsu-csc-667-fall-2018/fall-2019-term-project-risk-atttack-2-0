@@ -1,6 +1,16 @@
 .h11{
   text-align: center;
 }
+.hacky{
+  display: none;
+}
+
+.players{
+  text-align: center;
+  font-family: Impact;
+  font-size: 15px;
+
+}
 
 .centerMiddle {
   -webkit-text-stroke: 1px black;

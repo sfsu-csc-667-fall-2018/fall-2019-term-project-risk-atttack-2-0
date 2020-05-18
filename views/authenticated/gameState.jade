@@ -1,7 +1,7 @@
 script(type='text/javascript' src='/javascripts/mapFunctions.js')
 script(src='/socket.io/socket.io.js')
 
-- var playerId = 1;
+- var playerId = 2;
 - var armies = 60;
 
 
@@ -9,14 +9,15 @@ script(src='/socket.io/socket.io.js')
 doctype html
 html
     head
-        title RiskAttack 2.0 Homepage         
+        title RiskAttack 2.0 Game Page         
         link(href='/css/map.css', type="text/css", rel='stylesheet')
 
     body
         include ./navbar.jade
-        h1.h11 Game Room #{game_id}
+        h1#header.h11 Game Room: 
+        //- p#players.players Test tes test
         //- h2#player.h11 Player #{playerId}
-        //- p Armies: #{armies}
+        p#playername.hacky Player #{playerId}
     
   dif.mainContainer
     div.parentflexContainer
@@ -32,5 +33,6 @@ html
     //-   include ./map/botthomhalf.jade
 
 script.
-  console.log("test: ", #{game_id})
+  console.log("test: ", "#{username}")
+  getGameInfo(#{game_id}); 
   reloadGameState(#{game_id}); 

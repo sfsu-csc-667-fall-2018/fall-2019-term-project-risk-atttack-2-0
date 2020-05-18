@@ -19,4 +19,3 @@ const init = (app, server) => {
 };
 
 module.exports = {init};
-
