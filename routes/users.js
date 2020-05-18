@@ -12,20 +12,7 @@ router.get('/login', function (request, response) {
     response.render('unauthenticated/login')
 });
 
-router.post('/login', /*(request, response) =>   {
-        const {password} = request.body;
-        console.log("We are in login post and the password received is: ", password);
-
-
-        /!*bcrypt.genSalt(saltRounds, function (err, salt) {
-            bcrypt.hash(password, salt, function (err, hash) {
-                // Store hash in your password DB.
-                request.password = hash;
-
-            });
-
-        })*!/
-},*/
+router.post('/login',
     passport.authenticate('local', {
 
         failureRedirect: '/users/login',
@@ -36,18 +23,7 @@ router.post('/login', /*(request, response) =>   {
             const {username} = request.body;
             //console.log("The password for said user is: ", db.Users.getHash(username));
             response.redirect('/lobby');
-        }/*,
-    function (request, response) {
-        const {password} = request.body;
-        bcrypt.genSalt(saltRounds, function (err, salt) {
-            bcrypt.hash(password, salt, function (err, hash) {
-                // Store hash in your password DB.
-                request.password = hash;
-
-            });
-
-        })
-    }*/
+        }
 );
 
 router.get('/logout', (request, response) => {

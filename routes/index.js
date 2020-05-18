@@ -5,8 +5,8 @@ var db = require('../db');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.redirect('/users/login')
-  // res.render('index', { title: 'Express' });
+  //res.redirect('/users/login')
+   res.render('index', { title: 'Express' });
 });
 /*router.get('/login', function(request, response) {
   response.send('respond with a resource');
