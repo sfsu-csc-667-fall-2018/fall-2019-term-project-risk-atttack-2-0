@@ -4,6 +4,12 @@ const connection = pgp(process.env.DATABASE_URL || "postgres://katiekirchner@loc
 module.exports = connection;*/
 
 const Users = require('./users.js');
+const GameState = require('./gameState.js');
+const Game = require('./game.js');
+
+
 module.exports = {
-    Users
+    Users,
+    GameState,
+    Game
 };

@@ -10,7 +10,7 @@ h2 {
   color: white;
   text-shadow:
       1px 1px 0 #000,
-    -2px -2px 0 #000,  
+    -2px -2px 0 #000,
      2px -2px 0 #000,
      -1px 2px 0 #000,
       2px 2px 0 #000;
@@ -33,8 +33,8 @@ button {
   font-family: "Lucida Console", Monaco, monospace;
   background-color: black;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  padding: 10px 20px;
+  margin: 5px 0;
   border: none;
   cursor: pointer;
   width: 100%;
@@ -73,12 +73,12 @@ span.psw {
 }
 
 .modal {
-  display: none; 
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; 
+  width: 100%;
   height: 100%;
   overflow: auto;
   background-color: #f1f1f1;
@@ -121,12 +121,12 @@ span.psw {
 }
 
 @-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
+  from {-webkit-transform: scale(0)}
   to {-webkit-transform: scale(1)}
 }
-  
+
 @keyframes animatezoom {
-  from {transform: scale(0)} 
+  from {transform: scale(0)}
   to {transform: scale(1)}
 }
 
@@ -150,7 +150,7 @@ span.psw {
   cursor: pointer;
   outline: none;
 }
-  
+
 #creation-submit:hover {
   background-color: #3e0869;
   text-shadow: 2px 2px 3px white;
