@@ -70,9 +70,9 @@ function gameInfoHtml(game_name, data1, data){
   console.log(data1);
 
   var player1 = data[0].username;
-  var player2 = (data.length > 2) ? data[1].username : " ";
-  var player3 = (data.length > 3) ? data[1].username : " ";
-  var player4 = (data.length > 4) ? data[1].username : " ";
+  var player2 = (data.length > 1) ? data[1].username : " ";
+  var player3 = (data.length > 2) ? data[2].username : " ";
+  var player4 = (data.length > 3) ? data[3].username : " ";
 
 
   var header =  document.getElementById("header");
