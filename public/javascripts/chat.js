@@ -3,7 +3,7 @@ const chatMessage = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 
-const playerName = document.getElementById('playername');
+const useName = document.getElementById('nameHack');
 const nameHolder = document.getElementById('playerHolder');
 
 // Get username and room from URL
@@ -50,7 +50,7 @@ chatForm.addEventListener('submit',(e) =>{
 });
 
 function outputMessage(message){
-  var name = playerName.innerHTML;
+  var name = useName.innerHTML;
 
   const div = document.createElement('p');
   div.classList.add('message');
@@ -70,8 +70,8 @@ function outputMessage(message){
 
 
 function outputPlayer(player) {
-  var name = playerName.innerHTML;
-  console.log(playerName.innerHTML);
+  var name = useName.innerHTML;
+  console.log(useName.innerHTML);
   nameHolder.innerHTML = `Current Player: ${name}`
   // playerName.innerHTML = `
   //   ${users.map(user => `<li>${user.username}</li>`).join('')}

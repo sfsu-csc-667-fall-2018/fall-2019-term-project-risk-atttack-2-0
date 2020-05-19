@@ -7,6 +7,8 @@ body {
 
 .inline{
   display: inline-flex;
+  margin: 0 0 0 11%;
+
 }
 
 .login-form-field {
@@ -30,7 +32,7 @@ body {
 
 
 .nav{
-  text-align: center;;
+  text-align: center;
 }
 
 h2 {

@@ -18,11 +18,18 @@ const getHash = (username) =>
 const findByName = (player1, player2, player3, player4) =>
     db.any("SELECT id, username FROM users WHERE (username=${player1}) or (username=${player2}) or (username=${player3}) or (username=${player4}) ", {player1, player2, player3, player4} );
 
+
+const findPlayersById = (player1, player2, player3, player4) =>
+    db.any("SELECT id, username FROM users WHERE (id=${player1}) or (id=${player2}) or (id=${player3}) or (id=${player4}) ", {player1, player2, player3, player4} );
+
+
+
 module.exports = {
   create,
   findByEmailAndPassword,
   findById,
   findByName,
   findByUsernameAndPassword,
-  getHash
+  getHash,
+  findPlayersById
 };

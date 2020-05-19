@@ -1,5 +1,6 @@
 const game_form = document.getElementById('creation-form');
 const user_name = document.getElementById('playername').innerHTML;
+const uid = document.getElementById('playeruid').innerHTML;
 
 
 
@@ -26,6 +27,7 @@ game_form.addEventListener('submit',(e) =>{
               'Content-Type': 'application/json'
           },
           body:JSON.stringify({
+            uid: uid,
             player1: user_name,
             player2: player2,
             player3: player3,
@@ -33,7 +35,7 @@ game_form.addEventListener('submit',(e) =>{
           })
       })
       .then(response => response.json())
-      .then(data => setUpGame(game_name, user_name, data))
+      .then(data => setUpGame(game_name, user_name, data, uid))
       .catch(error => console.log(error))
 
 
@@ -42,7 +44,7 @@ game_form.addEventListener('submit',(e) =>{
 
 
 
-function setUpGame(game_name, user_name, data){
+function setUpGame(game_name, user_name, data, uid){
   console.log(data)
   console.log(data.length)
   console.log("username: ",user_name)
@@ -64,6 +66,7 @@ function setUpGame(game_name, user_name, data){
           },
           followAllRedirects: true,
           body:JSON.stringify({
+            uid: uid,
             game_name: game_name,
             username:  user_name,
             player1: player1,
@@ -94,7 +97,7 @@ function listGames(user){
       .then(response => response.json())
       .then(data =>
           data.forEach(function(obj){
-            gameInfoHtml(obj.id, obj.name, obj.createdat, user)
+            gameInfoHtml(obj.id, obj.name, obj.createdat, user, uid)
           })
       )
       .catch(error => console.log(error))
@@ -102,12 +105,12 @@ function listGames(user){
 }
 
 
-function gameInfoHtml(id, name, createdat, user){
+function gameInfoHtml(id, name, createdat, user, uid){
   var game_list =  document.getElementById("gameBox");
 
   var p = document.createElement('p')
   p.innerHTML =
-  `<a href="/games/gameState?id=${id}&username=${user}">Name: ${name}</a>`;
+  `<a href="/games/gameState?id=${id}&username=${user}&uid=${uid}">Name: ${name}</a>`;
 
   game_list.appendChild(p);
 

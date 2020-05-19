@@ -2,7 +2,7 @@ script(type='text/javascript' src='/javascripts/mapFunctions.js')
 script(src='/socket.io/socket.io.js')
 
 - var playerId = 2;
-- var armies = 60;
+- var armies = 0;
 
 
   
@@ -14,16 +14,19 @@ html
 
     body
         include ./navbar.jade
+      div
         h1#header.h11 Game Room: 
-        //- p#players.players Test tes test
-        //- h2#player.h11 Player #{playerId}
-        p#playername.hacky Player #{playerId}
+        p#gPlayers.players Players:
+        p#nameHack.hacky #{username}
     
-  dif.mainContainer
+  div.mainContainer
     div.parentflexContainer
       include ./map/map.jade
-    div.sideContainer
-      include ./chatBox.jade
+      
+    div.sideParent
+      h2#pname.center
+      div.sideContainer
+        include ./chatBox.jade
 
 
       
@@ -33,6 +36,6 @@ html
     //-   include ./map/botthomhalf.jade
 
 script.
-  console.log("test: ", "#{username}")
+  playerName("#{username}");
   getGameInfo(#{game_id}); 
   reloadGameState(#{game_id}); 

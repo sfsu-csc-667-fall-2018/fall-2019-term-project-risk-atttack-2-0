@@ -5,6 +5,10 @@
   display: none;
 }
 
+.center{
+  text-align: center;
+}
+
 .players{
   text-align: center;
   font-family: Impact;
@@ -219,12 +223,19 @@
   font-size: 15px;
 }
 
+.sideParent{
+  align-self: right;
+  height: 90%;
+  width: 19%;
+  margin-bottom: 10%;
+}
+
 .sideContainer{
   align-self: right;
   height: 500px;
   padding: 1%;
   /* padding-left: 1%; */
-  width: 18%;
+  width: 100%;
   background-color: gray;
   opacity: 0.9;
   border-radius: 5px;

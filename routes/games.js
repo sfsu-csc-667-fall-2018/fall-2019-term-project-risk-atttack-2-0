@@ -22,6 +22,7 @@ router.post('/creategame', function(request, response) {
 
 
 router.post('/gameSetUp', function(request, response) {
+    var uid = request.body.uid;
     var name = request.body.game_name;
     var username = request.body.username;
 
@@ -32,13 +33,13 @@ router.post('/gameSetUp', function(request, response) {
     var players = 4;
     var password = '';
 
-    console.log("herree: ", username, player1, player2, player3, player4)
+    console.log("herree: ", uid)
 
 
     db.Game.createGame(name, players, password, player1, player2, player3, player4)
       .then(result => {
           response.redirect("/games/createGameState?id="
-                            + result[0].id + "&username=" + username);
+                            + result[0].id + "&username=" + username + "&uid=" + uid );
       })
       .catch(error => {
         console.log("ERROR", error);
@@ -50,6 +51,8 @@ router.post('/gameSetUp', function(request, response) {
 
 
 router.get('/createGameState', function(request, response) {
+    var uid = request.query.uid;
+
     var username = request.query.username;
     var game_id = request.query.id;
 
@@ -58,7 +61,7 @@ router.get('/createGameState', function(request, response) {
     db.GameState.createGameState(game_id)
       .then(result => {
         response.redirect("/games/gameState?id=" + game_id +
-                            "&username=" + username)
+                            "&username=" + username + "&uid=" + uid)
       })
       .catch(error => {
         console.log("ERROR", error);
@@ -70,6 +73,8 @@ router.get('/createGameState', function(request, response) {
 
 
 router.get('/gameState', function(request, response) {
+    var uid = request.query.uid;
+
     var username = request.query.username;
     var game_id = request.query.id;
 
@@ -78,7 +83,7 @@ router.get('/gameState', function(request, response) {
 
     db.GameState.getGameState(game_id)
       .then(result => {
-        response.render('authenticated/gameState', {game_id: game_id, username:username})
+        response.render('authenticated/gameState', {game_id: game_id, username:username, uid: uid})
         response.end();
       })
       .catch(error => {
@@ -109,7 +114,6 @@ router.get('/getgameState', function(request, response) {
 router.post('/gameState', function(request, response) {
   const {game_id, owner_column, playerId, armies_column, armies} = request.body;
 
-  console.log("Here 1", game_id, owner_column, playerId, armies_column, armies);
 
   db.GameState.updateGameState(game_id, owner_column, playerId, armies_column, armies)
     .then(result => {
